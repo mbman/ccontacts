@@ -1,20 +1,35 @@
-HR Contacts
-===========
+# HR Contacts
 
 Simple contact manager responsive web app.
 
 Try it out: http://...
 
-Built using:
+## Libraries used:
 
-- backbone.js
-- bootstrap 3
-- zend framework 2
-- doctrine orm
+- [Backbone.js](http://backbonejs.org/)
+- [Bootstrap 3](http://getbootstrap.com/)
+- [Zend Framework 2](http://framework.zend.com/)
+- [Doctrine ORM](http://www.doctrine-project.org/)
+- [Composer](http://getcomposer.org/)
 
 This repo also includes a Vagrant chef cookbook to get your development
 environment up and runing in no time.
 
-INSTALLATION
-------------
+## Local Setup
 
+  1. Clone the repo: `git clone git@github.com:mbman/hr-contacts.git`
+  2. Initialize git submodules: `git submodule update --init --recursive`
+  3. Do the following steps only if you DO NOT plan on using the provided Vagrant server because it executes them automatically
+  4. Install Composer: http://getcomposer.org/download/
+  5. Install dependencies (ZF2, Doctrine & PHPunit): `sudo composer install --dev` or `sudo php composer,phar install --dev`
+
+## Vagrant server:
+
+If you don't have a local LAMP server running PHP 5.4 or higher, 
+you can use the provider Vagrant development server cookbook.
+
+  1. Modify the `Vagrantfile` or leave the defaults
+  2. Run `vagrant up` from the project root directory
+  3. HR Contacts is now running on IP `192.168.56.101` using `*.hrcontacts.dev` alias
+
+[More info on LAMPapp Vagrant cookbook](https://github.com/mbman/lampapp-vagrant)
