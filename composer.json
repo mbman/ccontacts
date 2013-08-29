@@ -1,0 +1,32 @@
+{
+    "name": "HR Contacts",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "dev-master",
+        "doctrine/doctrine-orm-module": "0.7.*",
+        "zendframework/zend-developer-tools": "dev-master",
+        "bjyoungblood/bjy-authorize": "dev-master",
+        "bjyoungblood/bjy-profiler": "dev-master",
+        "evandotpro/edp-module-layouts": "dev-master",
+        "zf-commons/zfc-base": "v0.1.2",
+        "zf-commons/zfc-user": "0.1.2",
+        "zf-commons/zfc-user-doctrine-orm": "dev-master",
+    },
+    "require-dev": {
+        "php": ">=5.4.7",
+        "zendframework/zftool": "dev-master",
+	    "sebastian/diff": "dev-master",
+        "sebastian/exporter": "dev-master",
+        "phpunit/phpunit": "dev-master",
+        "phpunit/phpunit-selenium": "dev-master",
+        "phpunit/phpunit-story": "dev-master",
+        "phpunit/phpunit-mock-objects": "dev-master",
+        "phpunit/dbunit": "dev-master",
+        "phpunit/php-timer": "dev-master",
+        "phpunit/php-invoker": "dev-master",
+        "phpunit/php-text-template": "dev-master",
+        "phpunit/php-code-coverage": "dev-master",
+        "phpunit/php-file-iterator": "dev-master",
+        "phpunit/phpunit-mock-objects": "dev-master"
+    }
+}
