@@ -1,0 +1,16 @@
+.idea/*
+data/*
+data/cache/
+composer.phar
+composer.lock
+vendor/*
+*.swp
+.buildpath
+.project
+.settings
+nbproject
+._*
+.~lock.*
+.DS_Store
+.idea
+.vagrant
