@@ -10,7 +10,7 @@
         "evandotpro/edp-module-layouts": "dev-master",
         "zf-commons/zfc-base": "v0.1.2",
         "zf-commons/zfc-user": "0.1.2",
-        "zf-commons/zfc-user-doctrine-orm": "dev-master",
+        "zf-commons/zfc-user-doctrine-orm": "dev-master"
     },
     "require-dev": {
         "php": ">=5.4.7",
