@@ -19,8 +19,7 @@ environment up and runing in no time.
 
   1. Clone the repo: `git clone git@github.com:mbman/hr-contacts.git`
   2. Initialize git submodules: `git submodule update --init --recursive`
-  3. Do the following steps only if you DO NOT plan on using the provided Vagrant server because it executes them automatically
-  4. Install Composer: http://getcomposer.org/download/
+  4. Install Composer: http://getcomposer.org/download/ (skip if using provided Vagrant server)
   5. Install dependencies (ZF2, Doctrine & PHPunit): `sudo composer install --dev` or `sudo php composer,phar install --dev`
 
 ## Vagrant server:
@@ -30,6 +29,11 @@ you can use the provider Vagrant development server cookbook.
 
   1. Modify the `Vagrantfile` or leave the defaults
   2. Run `vagrant up` from the project root directory
-  3. HR Contacts is now running on IP `192.168.56.101` using `*.hrcontacts.dev` alias
+  3. SSH into your server: `vagrant ssh`
+  4. Go to web root: `cd /var/www/`
+  5. Remove Apache's default html: `sudo rm index.html`
+  6. Install dependencies (ZF2, Doctrine & PHPunit): `sudo composer install --dev`
+
+HR Contacts is now running on IP `192.168.56.101` using `hrcontacts.dev` wildcard alias with ssl support
 
 [More info on LAMPapp Vagrant cookbook](https://github.com/mbman/lampapp-vagrant)
