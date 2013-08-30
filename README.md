@@ -1,4 +1,4 @@
-# HR Contacts
+# C-Contacts
 
 Simple contact manager responsive web app.
 
@@ -17,7 +17,7 @@ environment up and runing in no time.
 
 ## Local Setup
 
-  1. Clone the repo: `git clone git@github.com:mbman/hr-contacts.git`
+  1. Clone the repo: `git clone git@github.com:mbman/ccontacts.git`
   2. Initialize git submodules: `git submodule update --init --recursive`
   4. Install Composer: http://getcomposer.org/download/ (skip if using provided Vagrant server)
   5. Install dependencies (ZF2, Doctrine & PHPunit): `sudo composer install --dev` or `sudo php composer,phar install --dev`
@@ -34,6 +34,6 @@ you can use the provider Vagrant development server cookbook.
   5. Remove Apache's default html: `sudo rm index.html`
   6. Install dependencies (ZF2, Doctrine & PHPunit): `sudo composer install --dev`
 
-HR Contacts is now running on IP `192.168.56.101` using `hrcontacts.dev` wildcard alias with ssl support
+HR Contacts is now running on IP `192.168.56.101` using `ccontacts.dev` wildcard alias with ssl support
 
 [More info on LAMPapp Vagrant cookbook](https://github.com/mbman/lampapp-vagrant)
