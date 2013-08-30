@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
 
         chef.json.merge!({
             :lampapp => {
-                :name => "hrcontacts",
+                :name => "ccontacts",
                 :password => "foobar",
                 :ip => "192.168.56.101",
                 :path => "public",
