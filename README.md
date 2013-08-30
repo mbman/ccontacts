@@ -34,6 +34,6 @@ you can use the provider Vagrant development server cookbook.
   5. Remove Apache's default html: `sudo rm index.html`
   6. Install dependencies (ZF2, Doctrine & PHPunit): `sudo composer install --dev`
 
-HR Contacts is now running on IP `192.168.56.101` using `ccontacts.dev` wildcard alias with ssl support
+The app is now running on: `192.168.56.101` using `ccontacts.dev` wildcard alias with ssl support
 
 [More info on LAMPapp Vagrant cookbook](https://github.com/mbman/lampapp-vagrant)
