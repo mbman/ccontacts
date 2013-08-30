@@ -1,4 +1,4 @@
-# HR Contacts
+# C-Contacts
 
 Simple contact manager responsive web app.
 
@@ -17,7 +17,7 @@ environment up and runing in no time.
 
 ## Local Setup
 
-  1. Clone the repo: `git clone git@github.com:mbman/hr-contacts.git`
+  1. Clone the repo: `git clone git@github.com:mbman/ccontacts.git`
   2. Initialize git submodules: `git submodule update --init --recursive`
   4. Install Composer: http://getcomposer.org/download/ (skip if using provided Vagrant server)
   5. Install dependencies (ZF2, Doctrine & PHPunit): `sudo composer install --dev` or `sudo php composer,phar install --dev`
