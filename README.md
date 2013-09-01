@@ -1,8 +1,9 @@
 # C-Contacts
 
-Simple contact manager responsive web app.
+Simple contact manager responsive web app with RESTful API.
 
 Try it out: http://...
+API documentation: http://
 
 ## Libraries used:
 
@@ -10,6 +11,7 @@ Try it out: http://...
 - [Bootstrap 3](http://getbootstrap.com/)
 - [Zend Framework 2](http://framework.zend.com/)
 - [Doctrine ORM](http://www.doctrine-project.org/)
+- [Swagger](https://developers.helloreverb.com/swagger/)
 - [Composer](http://getcomposer.org/)
 
 This repo also includes a Vagrant chef cookbook to get your development
@@ -22,7 +24,7 @@ environment up and runing in no time.
   4. Install Composer: http://getcomposer.org/download/ (skip if using provided Vagrant server)
   5. Install dependencies (ZF2, Doctrine & PHPunit): `sudo composer install --dev` or `sudo php composer,phar install --dev`
   6. Set ZF2 application environment by adding `SetEnv APPLICATION_ENV development` to Apache's `httpd.conf` (skip if using the provided Vagrant server)
-  
+
 ### Database setup
 
 Setup DoctrineORM with MySQL adapter, from project root directory:
@@ -34,7 +36,7 @@ Update database: `./vendor/bin/doctrine-module orm:schema-tool:update --force`
 
 ### Vagrant server setup:
 
-If you don't have a local LAMP server running PHP 5.4 or higher, 
+If you don't have a local LAMP server running PHP 5.4 or higher,
 you can use the provider Vagrant development server cookbook.
 
   1. Modify the `Vagrantfile` or leave the defaults

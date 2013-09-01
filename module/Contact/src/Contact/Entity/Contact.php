@@ -1,20 +1,20 @@
 <?php
 namespace Contact\Entity;
 
-
-use Survey\Entity\Answer;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\EntityManager as EntityManager;
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Zend\InputFilter\Factory as InputFactory;     
-use Zend\InputFilter\InputFilter;                 
-use Zend\InputFilter\InputFilterAwareInterface;   
-use Zend\InputFilter\InputFilterInterface;  
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+use Swagger\Annotations as SWG;
 
 /**
 * @ORM\Entity(repositoryClass="ContactRepository")
 * @ORM\HasLifecycleCallbacks
+* @SWG\Model(id="Contact")
 */
 class Contact implements InputFilterAwareInterface
 {
@@ -26,81 +26,81 @@ class Contact implements InputFilterAwareInterface
     */
     protected $id;
 
-    /** 
+    /**
      * Creation date
      * @ORM\Column(type="datetime")
      * @var DateTime
      */
     protected $created;
 
-    /** 
+    /**
      * Last edit date
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime",nullable=true)
      * @var DateTime
      */
     protected $edited;
 
-    /** 
+    /**
      * @ORM\Column(type="string",length=255,nullable=false)
      * @var string
      */
     protected $lastName;
 
-    /** 
+    /**
      * @ORM\Column(type="string",length=255,nullable=false)
      * @var string
      */
     protected $firstName;
 
-    /** 
+    /**
      * @ORM\Column(type="string",length=255,nullable=true)
      * @var string
      */
     protected $company;
 
-    /** 
+    /**
      * @ORM\Column(type="string",length=255,nullable=false)
      * @var string
      */
     protected $job;
 
-    /** 
+    /**
      * @ORM\Column(type="string",length=255,nullable=true)
      * @var string
      */
     protected $address;
 
-    /** 
+    /**
      * @ORM\Column(type="string",length=255,nullable=true)
      * @var string
      */
     protected $city;
 
-    /** 
+    /**
      * @ORM\Column(type="string",length=255,nullable=true)
      * @var string
      */
     protected $state;
 
-    /** 
+    /**
      * @ORM\Column(type="string",length=255,nullable=true)
      * @var string
      */
     protected $zip;
 
-    /** 
+    /**
      * @ORM\Column(type="string",length=255,nullable=true)
      * @var string
      */
     protected $country;
 
-    /** 
+    /**
      * @ORM\Column(type="string",length=255,nullable=true)
      * @var string
      */
     protected $notes;
 
-    /** 
+    /**
      * @var ContactRepository
      */
     protected $repository;
@@ -114,25 +114,24 @@ class Contact implements InputFilterAwareInterface
      * Doctrine EntityManager
      * @var Doctrine\ORM\EntityManager
      */
-    protected $entityManager; 
+    protected $entityManager;
 
     public function __construct()
     {
-        $this->answers = new ArrayCollection();
     }
 
-    public function setEntityManager(\Doctrine\ORM\EntityManager $entityManager) 
-    { 
-        $this->entityManager = $entityManager; 
+    public function setEntityManager(\Doctrine\ORM\EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
         return $this;
-    } 
+    }
 
-    public function getEntityManager() 
-    { 
-        return $this->entityManager; 
-    } 
-    
-    /** 
+    public function getEntityManager()
+    {
+        return $this->entityManager;
+    }
+
+    /**
      * @return int
      */
     public function getId()
@@ -316,7 +315,7 @@ class Contact implements InputFilterAwareInterface
     public function getCity()
     {
         return $this->city;
-    }  
+    }
 
     /**
      * @param string $city
@@ -342,7 +341,7 @@ class Contact implements InputFilterAwareInterface
 
     /**
      * Sets the creation datetime to now
-     * 
+     *
      * @ORM\PrePersist
      */
     public function setCreated()
@@ -363,7 +362,7 @@ class Contact implements InputFilterAwareInterface
         if ($datetime instanceof \DateTime) {
             $this->startDate = $datetime;
         } else {
-            $this->startDate = 
+            $this->startDate =
                 $datetime != '' ? new \DateTime($datetime) : null;
         }
         return $this;
@@ -382,7 +381,7 @@ class Contact implements InputFilterAwareInterface
      */
     public function getStartDateFormated($html5Format = false)
     {
-        return $this->startDate !== null ? 
+        return $this->startDate !== null ?
                     $this->startDate->format($html5Format ? 'Y-m-d\TH:i' : 'M-d-Y H:i') : '';
     }
 

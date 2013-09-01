@@ -13,6 +13,7 @@ return array(
         'ZfcBase',
         'Application',
         'Contact',
+        'SwaggerModule',
         'EdpModuleLayouts',
         ),
     'module_listener_options' => array(
