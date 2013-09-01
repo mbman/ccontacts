@@ -28,7 +28,11 @@ class ContactController extends EntityUsingRestfulController
 
     public function getList()
     {
-        return new JsonModel();
+        $data = [];
+        foreach($this->getContactRepository()->findAll() as $result) {
+            $data[] = $result;
+        }
+        return new JsonModel(array('data' => $data));
     }
  
     public function get($id)
