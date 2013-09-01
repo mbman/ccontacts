@@ -6,6 +6,7 @@ use Zend\View\Model\JsonModel;
 use Contact\Entity\Contact;
 use RuntimeException;
 use Swagger\Annotations as SWG;
+use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity as DoctrineHydrator;
 
 /**
  * @SWG\Resource(
@@ -41,7 +42,7 @@ class ContactController extends EntityUsingRestfulController
      *   description="Get contacts list",
      *   @SWG\Operations(
      *       @SWG\Operation(
-     *           httpMethod="GET", nickname="getList"
+     *           httpMethod="GET", nickname="getContacts",responseClass="Contact"
      *       )
      *     )
      *   )
@@ -49,11 +50,12 @@ class ContactController extends EntityUsingRestfulController
      */
     public function getList()
     {
-        $data = [];
-        foreach($this->getContactRepository()->findAll() as $result) {
-            $data[] = $result;
+        $hydrator = new DoctrineHydrator($this->getEntityManager(),'Contact\Entity\Contact');
+        $contacts = [];
+        foreach($this->getContactRepository()->findAll() as $contact) {
+            $contacts[] = $hydrator->extract($contact);
         }
-        return new JsonModel(array('data' => $data));
+        return new JsonModel(array('data' => $contacts));
     }
 
 
@@ -76,7 +78,13 @@ class ContactController extends EntityUsingRestfulController
      */
     public function get($id)
     {
-        return new JsonModel();
+        $contact = $this->getContactRepository()->find($id);
+        if (!$contact) {
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+        $hydrator = new DoctrineHydrator($this->getEntityManager(),'Contact\Entity\Contact');
+        return new JsonModel($hydrator->extract($contact));
     }
 
     public function create($data)
