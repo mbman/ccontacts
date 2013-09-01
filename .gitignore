@@ -1,5 +1,4 @@
 .idea/*
-data/*
 data/cache/
 composer.phar
 composer.lock
