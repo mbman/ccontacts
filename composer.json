@@ -1,16 +1,13 @@
 {
-    "name": "HR Contacts",
+    "name": "CContacts",
     "require": {
         "php": ">=5.3.3",
         "zendframework/zendframework": "dev-master",
         "doctrine/doctrine-orm-module": "0.7.*",
         "zendframework/zend-developer-tools": "dev-master",
-        "bjyoungblood/bjy-authorize": "dev-master",
         "bjyoungblood/bjy-profiler": "dev-master",
         "evandotpro/edp-module-layouts": "dev-master",
         "zf-commons/zfc-base": "v0.1.2",
-        "zf-commons/zfc-user": "0.1.2",
-        "zf-commons/zfc-user-doctrine-orm": "dev-master"
     },
     "require-dev": {
         "php": ">=5.4.7",
