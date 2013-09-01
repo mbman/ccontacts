@@ -8,7 +8,8 @@
         "bjyoungblood/bjy-profiler": "dev-master",
         "evandotpro/edp-module-layouts": "dev-master",
         "zf-commons/zfc-base": "v0.1.2",
-        "zircote/swagger-php": "master-dev"
+        "zircote/swagger-php": "master-dev",
+        "outeredge/swagger-module": "dev-master"
     },
     "require-dev": {
         "php": ">=5.4.7",
