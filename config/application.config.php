@@ -12,6 +12,7 @@ return array(
         'DoctrineORMModule',
         'ZfcBase',
         'Application',
+        'Contact',
         'EdpModuleLayouts',
         ),
     'module_listener_options' => array(

@@ -1,9 +1,9 @@
 <?php
 namespace Application\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Mvc\Controller\AbstractRestfulController;
 
-class EntityUsingController extends AbstractActionController
+class EntityUsingRestfulController extends AbstractRestfulController
 {
 
     /**
