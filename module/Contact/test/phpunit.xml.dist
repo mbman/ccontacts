@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit colors="true" bootstrap="Bootstrap.php">
+    <testsuites>
+        <testsuite name="contact">
+            <directory>./ContactTest</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
