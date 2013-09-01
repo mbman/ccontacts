@@ -23,8 +23,16 @@ environment up and runing in no time.
   5. Install dependencies (ZF2, Doctrine & PHPunit): `sudo composer install --dev` or `sudo php composer,phar install --dev`
   6. Set ZF2 application environment by adding `SetEnv APPLICATION_ENV development` to Apache's `httpd.conf` (skip if using the provided Vagrant server)
   
+### Database setup
 
-## Vagrant server:
+Setup DoctrineORM with MySQL adapter, from project root directory:
+
+  1. Validate database schema: `./vendor/bin/doctrine-module orm:validate-schema`
+  2.  Create database: `./vendor/bin/doctrine-module orm:schema-tool:create`
+
+Update database: `./vendor/bin/doctrine-module orm:schema-tool:update --force`
+
+### Vagrant server setup:
 
 If you don't have a local LAMP server running PHP 5.4 or higher, 
 you can use the provider Vagrant development server cookbook.
@@ -39,3 +47,9 @@ you can use the provider Vagrant development server cookbook.
 The app is now running on: `192.168.56.101` using `ccontacts.dev` wildcard alias with ssl support
 
 [More info on LAMPapp Vagrant cookbook](https://github.com/mbman/lampapp-vagrant)
+
+## Unit Testing
+
+PHPunit is included using Composer.
+
+Run `../../../vendor/bin/phpunit` from "module/[Module name]/test/" directory.
