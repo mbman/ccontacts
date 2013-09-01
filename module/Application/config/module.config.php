@@ -20,13 +20,27 @@ return array(
                     ),
                 ),
             ),
-            'docs' => array(
+            'api-docs' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/docs',
+                    'route'    => '/api-docs',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
                         'action'     => 'docs',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/[:path]',
+                            'constraints' => array(
+                                'path' => '[a-zA-Z][a-zA-Z0-9_/-]*',
+                            ),
+                            'defaults' => array(
+                            ),
+                        ),
                     ),
                 ),
             ),

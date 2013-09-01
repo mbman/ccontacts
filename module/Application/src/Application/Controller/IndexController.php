@@ -11,6 +11,8 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
+use Swagger\Swagger;
 
 class IndexController extends AbstractActionController
 {
@@ -20,5 +22,15 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {
         $this->redirect()->toUrl('index.htm');
+    }
+
+    /**
+     * Swagger REST API documentation
+     */
+    public function docsAction()
+    {
+        $swagger = $this->getServiceLocator()->get('service.swagger');
+        $swagger->flushCache();
+        return new JsonModel(json_decode($swagger->getResource('/'.$this->params('path')), true));
     }
 }
