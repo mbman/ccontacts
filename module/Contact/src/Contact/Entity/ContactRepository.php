@@ -1,8 +1,8 @@
 <?php
-namespace Client\Entity;
+namespace Contact\Entity;
 use Doctrine\ORM\EntityRepository;
 
-class ClientRepository extends EntityRepository
+class ContactRepository extends EntityRepository
 {
     
 }
