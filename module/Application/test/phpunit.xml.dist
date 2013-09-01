@@ -2,7 +2,7 @@
 
 <phpunit colors="true" bootstrap="Bootstrap.php">
     <testsuites>
-        <testsuite name="onlinesurvey">
+        <testsuite name="application">
             <directory>./ApplicationTest</directory>
         </testsuite>
     </testsuites>
