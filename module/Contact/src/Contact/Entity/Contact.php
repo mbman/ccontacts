@@ -1,8 +1,6 @@
 <?php
 namespace Contact\Entity;
 
-
-use Survey\Entity\Answer;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\EntityManager as EntityManager;
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
@@ -118,7 +116,6 @@ class Contact implements InputFilterAwareInterface
 
     public function __construct()
     {
-        $this->answers = new ArrayCollection();
     }
 
     public function setEntityManager(\Doctrine\ORM\EntityManager $entityManager) 

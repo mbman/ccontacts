@@ -8,28 +8,46 @@ use RuntimeException;
 
 class ContactController extends EntityUsingRestfulController
 {
+    /**
+     * @var [type]
+     */
+    protected $contactRepository;
+
+    /**
+     * Returns the Contact Doctrine repository
+     * @return Contact\Entity\Contact
+     */
+    public function getContactRepository()
+    {
+        if (!$this->contactRepository) {
+            $em = $this->getEntityManager();
+            $this->contactRepository = $em->getRepository('Contact\Entity\Contact');
+        }
+        return $this->contactRepository;
+    }
+
     public function getList()
     {
-        # code...
+        return new JsonModel();
     }
  
     public function get($id)
     {
-        # code...
+        return new JsonModel();
     }
  
     public function create($data)
     {
-        # code...
+        return new JsonModel();
     }
  
     public function update($id, $data)
     {
-        # code...
+        return new JsonModel();
     }
  
     public function delete($id)
     {
-        # code...
+        return new JsonModel();
     }
 }
