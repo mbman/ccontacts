@@ -21,6 +21,8 @@ environment up and runing in no time.
   2. Initialize git submodules: `git submodule update --init --recursive`
   4. Install Composer: http://getcomposer.org/download/ (skip if using provided Vagrant server)
   5. Install dependencies (ZF2, Doctrine & PHPunit): `sudo composer install --dev` or `sudo php composer,phar install --dev`
+  6. Set ZF2 application environment by adding `SetEnv APPLICATION_ENV development` to Apache's `httpd.conf` (skip if using the provided Vagrant server)
+  
 
 ## Vagrant server:
 
