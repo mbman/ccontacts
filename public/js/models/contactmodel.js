@@ -16,14 +16,11 @@ window.ContactCollection = Backbone.Collection.extend({
     url:"../contact",
 
     search:function (key) {
-        var url = (key == '') ? '../contact' : "../contact/search/" + key;
-        console.log('search: ' + key);
         var self = this;
         $.ajax({
-            url:url,
+            url:"../contact"+(key ? "/search/" + key : ""),
             dataType:"json",
             success:function (data) {
-                console.log("search success: " + data.length);
                 self.reset(data);
             }
         });

@@ -11,12 +11,11 @@ window.Router = Backbone.Router.extend({
     },
 
     home: function () {
-        // Since the home view never changes, we instantiate it and render it only once
         if (!this.homeView) {
             this.homeView = new HomeView();
             this.homeView.render();
         } else {
-            this.homeView.delegateEvents(); // delegate events when the view is recycled
+            this.homeView.delegateEvents();
         }
         $("#content").html(this.homeView.el);
         this.headerView.select('menu-home');
