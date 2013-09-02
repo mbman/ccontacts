@@ -22,6 +22,16 @@ return array(
                     ),
                 ),
             ),
+            'contact-search' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/contact/search/:query',
+                    'defaults' => array(
+                        'controller' => 'Contact\Controller\Contact',
+                        'action' => 'search'
+                    ),
+                ),
+            ),
         ),
     ),
 

@@ -14,6 +14,8 @@ use Swagger\Annotations as SWG;
 /**
 * @ORM\Entity(repositoryClass="ContactRepository")
 * @ORM\HasLifecycleCallbacks
+* @ORM\Table(indexes={@ORM\Index(name="search_idx", columns={"firstName", "lastName","company","city"})})
+*
 * @SWG\Model(id="Contact")
 */
 class Contact implements InputFilterAwareInterface

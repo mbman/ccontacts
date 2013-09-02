@@ -24,6 +24,7 @@ class ContactController extends EntityUsingRestfulController
 
     /**
      * Returns the Contact Doctrine repository
+     *
      * @return Contact\Entity\Contact
      */
     public function getContactRepository()
@@ -36,13 +37,23 @@ class ContactController extends EntityUsingRestfulController
     }
 
     /**
+     * Returns the Contact model hydrator
+     *
+     * @return DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity
+     */
+    public function getContactHydrator()
+    {
+        return new DoctrineHydrator($this->getEntityManager(),'Contact\Entity\Contact');
+    }
+
+    /**
      *
      * @SWG\Api(
      *   path="/contact",
      *   description="Get contacts list",
      *   @SWG\Operations(
      *       @SWG\Operation(
-     *           httpMethod="GET", nickname="getContacts",responseClass="Contact"
+     *           httpMethod="GET", nickname="getList",responseClass="Contact"
      *       )
      *     )
      *   )
@@ -50,9 +61,32 @@ class ContactController extends EntityUsingRestfulController
      */
     public function getList()
     {
-        $hydrator = new DoctrineHydrator($this->getEntityManager(),'Contact\Entity\Contact');
+        $hydrator = $this->getContactHydrator();
         $contacts = [];
-        foreach($this->getContactRepository()->findAll() as $contact) {
+        foreach($this->getContactRepository()->search() as $contact) {
+            $contacts[] = $hydrator->extract($contact);
+        }
+        return new JsonModel($contacts);
+    }
+
+    /**
+     *
+     * @SWG\Api(
+     *   path="/contact/search/{query}",
+     *   description="Search contacts list by name, e-mail, tag, company...",
+     *   @SWG\Operations(
+     *       @SWG\Operation(
+     *           httpMethod="GET",nickname="search",responseClass="Contact"
+     *       )
+     *     )
+     *   )
+     * )
+     */
+    public function searchAction()
+    {
+        $hydrator = $this->getContactHydrator();
+        $contacts = [];
+        foreach($this->getContactRepository()->search($this->params('query')) as $contact) {
             $contacts[] = $hydrator->extract($contact);
         }
         return new JsonModel($contacts);
@@ -67,7 +101,7 @@ class ContactController extends EntityUsingRestfulController
      *   @SWG\Operations(
      *       @SWG\Operation(
      *           httpMethod="GET", summary="Find contact by ID", notes="Returns a contact by ID",
-     *           responseClass="Contact", nickname="getContactById",
+     *           responseClass="Contact",nickname="getContactById",
      *           @SWG\ErrorResponses(
      *               @SWG\ErrorResponse(code="404", reason="Contact not found")
      *           )
@@ -83,7 +117,7 @@ class ContactController extends EntityUsingRestfulController
             $this->getResponse()->setStatusCode(404);
             return;
         }
-        $hydrator = new DoctrineHydrator($this->getEntityManager(),'Contact\Entity\Contact');
+        $hydrator = $this->getContactHydrator();
         return new JsonModel($hydrator->extract($contact));
     }
 
