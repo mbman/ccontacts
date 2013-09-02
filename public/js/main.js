@@ -1,7 +1,8 @@
 window.Router = Backbone.Router.extend({
 
     routes: {
-        "": "home"
+        "": "home",
+        "contact/:id": "contactDetails"
     },
 
     initialize: function () {
@@ -19,11 +20,12 @@ window.Router = Backbone.Router.extend({
         }
         $("#content").html(this.homeView.el);
         this.headerView.select('menu-home');
+        this.headerView.search(false);
     }
 
 });
 
-templateLoader.load(["HomeView", "HeaderView"],
+templateLoader.load(["HomeView", "HeaderView", "ContactListItemView"],
     function () {
         app = new Router();
         Backbone.history.start();

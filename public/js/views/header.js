@@ -1,6 +1,8 @@
 window.HeaderView = Backbone.View.extend({
 
     initialize: function () {
+        this.searchResults = new ContactCollection();
+        this.searchresultsView = new ContactListView({model: this.searchResults});
     },
 
     render: function () {
@@ -15,8 +17,11 @@ window.HeaderView = Backbone.View.extend({
 
     search: function (event) {
         var key = $('#search-q').val();
-        event.preventDefault();
-        console.log('search ' + key);
+        $('#search-results').append(this.searchresultsView.render().el);
+        this.searchResults.search(key);
+        if (event != false) {
+            event.preventDefault();
+        }
     },
 
     onkeypress: function (event) {
