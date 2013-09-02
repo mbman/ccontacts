@@ -24,6 +24,7 @@ class Contact implements InputFilterAwareInterface
     * @ORM\Id
     * @ORM\GeneratedValue(strategy="AUTO")
     * @ORM\Column(type="integer")
+    * @SWG\Property(name="id",type="int")
     * @var int
     */
     protected $id;
@@ -31,6 +32,7 @@ class Contact implements InputFilterAwareInterface
     /**
      * Creation date
      * @ORM\Column(type="datetime")
+     * @SWG\Property(name="created",type="datetime")
      * @var DateTime
      */
     protected $created;
@@ -38,66 +40,77 @@ class Contact implements InputFilterAwareInterface
     /**
      * Last edit date
      * @ORM\Column(type="datetime",nullable=true)
+     * @SWG\Property(name="edited",type="datetime")
      * @var DateTime
      */
     protected $edited;
 
     /**
      * @ORM\Column(type="string",length=255,nullable=false)
+     * @SWG\Property(name="lastName",type="string")
      * @var string
      */
     protected $lastName;
 
     /**
      * @ORM\Column(type="string",length=255,nullable=false)
+     * @SWG\Property(name="firstName",type="string")
      * @var string
      */
     protected $firstName;
 
     /**
      * @ORM\Column(type="string",length=255,nullable=true)
+     * @SWG\Property(name="company",type="string")
      * @var string
      */
     protected $company;
 
     /**
-     * @ORM\Column(type="string",length=255,nullable=false)
+     * @ORM\Column(type="string",length=80,nullable=false)
+     * @SWG\Property(name="job",type="string")
      * @var string
      */
     protected $job;
 
     /**
      * @ORM\Column(type="string",length=255,nullable=true)
+     * @SWG\Property(name="address",type="string")
      * @var string
      */
     protected $address;
 
     /**
      * @ORM\Column(type="string",length=255,nullable=true)
+     * @SWG\Property(name="city",type="string")
      * @var string
      */
     protected $city;
 
     /**
      * @ORM\Column(type="string",length=255,nullable=true)
+     * @SWG\Property(name="state",type="string")
      * @var string
      */
     protected $state;
 
     /**
-     * @ORM\Column(type="string",length=255,nullable=true)
+     * @ORM\Column(type="string",length=20,nullable=true)
+     * @SWG\Property(name="zip",type="string")
      * @var string
      */
     protected $zip;
 
     /**
      * @ORM\Column(type="string",length=255,nullable=true)
+     * @SWG\Property(name="country",type="string")
      * @var string
      */
     protected $country;
 
     /**
      * @ORM\Column(type="string",length=255,nullable=true)
+     * @SWG\Property(name="notes",type="string")
      * @var string
      */
     protected $notes;
