@@ -2,8 +2,8 @@
 
 Simple contact manager responsive web app with RESTful API.
 
-Try it out: http://...
-API documentation: http://
+- Try it out: http://mb.fullbusiness.com/cc/public/index.htm
+- Swagger REST API documentation: http://mb.fullbusiness.com/cc/public/api-docs/contact
 
 ## Libraries used:
 
