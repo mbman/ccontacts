@@ -1,3 +1,18 @@
-<a href="#contact/<%= id %>">
-    <p class="list-item"><%= firstName %> <%= lastName %><br /><%= company %></p>
-</a>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><a title="More info" href="#contact/<%= id %>"><%= firstName %> <%= lastName %><small>, <%= job %></small></a></h3>
+  </div>
+  <div class="panel-body">
+    <div class="btn-group btn-group-xs pull-right">
+      <a href="#contact/<%= id %>" class="btn btn-info">Details</a>
+      <a href="#contact/<%= id %>" class="btn btn-warning">Edit</a>
+      <a href="#contact/<%= id %>" class="btn btn-danger">Delete</a>
+    </div>
+  <address>
+      <strong><%= company %></strong><br>
+      <%= address %><br>
+      <%= city %>, <%= state %> <%= zip %><br>
+      <%= country %>
+    </address>
+  </div>
+</div>
