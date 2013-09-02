@@ -14,5 +14,5 @@
 return array(
     // NO trailing slash
     'domain' => 'http://mb.fullbusiness.com',
-    'basePath' => '/cc',
+    'basePath' => '/cc/public',
 );
