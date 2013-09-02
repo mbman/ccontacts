@@ -76,7 +76,15 @@ class ContactController extends EntityUsingRestfulController
      *   description="Search contacts list by name, e-mail, tag, company...",
      *   @SWG\Operations(
      *       @SWG\Operation(
-     *           httpMethod="GET",nickname="search",responseClass="Contact"
+     *           httpMethod="GET",nickname="search",responseClass="Contact",
+     *           @SWG\Parameters(@SWG\Parameter(
+     *             name="query",
+     *             description="Search query",
+     *             paramType="path",
+     *             required="false",
+     *             allowMultiple="false",
+     *             dataType="string"
+     *           ))
      *       )
      *     )
      *   )
