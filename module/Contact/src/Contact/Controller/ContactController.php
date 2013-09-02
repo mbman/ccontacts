@@ -55,7 +55,7 @@ class ContactController extends EntityUsingRestfulController
         foreach($this->getContactRepository()->findAll() as $contact) {
             $contacts[] = $hydrator->extract($contact);
         }
-        return new JsonModel(array('data' => $contacts));
+        return new JsonModel($contacts);
     }
 
 
