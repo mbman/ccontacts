@@ -4,25 +4,25 @@
     <div class="form-group" data-el="firstName">
     <label for="inputFirstName" class="col-md-3 control-label">First name</label>
     <div class="col-md-9">
-        <input type="text" value="<%= firstName %>" class="form-control" name="firstName" id="inputFirstName" placeholder="Required">
+        <input type="text" value="<%- firstName %>" class="form-control" name="firstName" id="inputFirstName" placeholder="Required">
     </div>
     </div>
     <div class="form-group" data-el="lastName">
     <label for="inputLastName" class="col-md-3 control-label">Last name</label>
     <div class="col-md-9">
-        <input type="text" value="<%= lastName %>" class="form-control" name="lastName" id="inputLastName" placeholder="Required">
+        <input type="text" value="<%- lastName %>" class="form-control" name="lastName" id="inputLastName" placeholder="Required">
     </div>
     </div>
     <div class="form-group" data-el="company">
       <label for="inputCompany" class="col-md-3 control-label">Company</label>
       <div class="col-md-9">
-        <input type="text" value="<%= company %>" class="form-control" name="company" id="inputCompany">
+        <input type="text" value="<%- company %>" class="form-control" name="company" id="inputCompany">
       </div>
     </div>
     <div class="form-group" data-el="job">
     <label for="inputJob" class="col-md-3 control-label">Position/job</label>
     <div class="col-md-9">
-        <input type="text" value="<%= job %>" class="form-control" name="job" id="inputJob">
+        <input type="text" value="<%- job %>" class="form-control" name="job" id="inputJob">
     </div>
     </div>
   </fieldset>
@@ -31,29 +31,29 @@
     <div class="form-group" data-el="address">
       <label for="inputAddress" class="col-md-3 control-label">Street</label>
       <div class="col-md-9">
-        <input type="text" value="<%= address %>" class="form-control" name="address" id="inputAddress">
+        <input type="text" value="<%- address %>" class="form-control" name="address" id="inputAddress">
       </div>
     </div>
     <div class="form-group">
       <label for="inputCity" class="col-md-3 control-label">City</label>
       <div class="col-md-5" data-el="city">
-        <input type="text" value="<%= city %>" class="form-control" name="city" id="inputCity">
+        <input type="text" value="<%- city %>" class="form-control" name="city" id="inputCity">
       </div>
       <label for="inputZip" class="col-md-1 control-label">ZIP</label>
       <div class="col-md-3" data-el="zip">
-        <input type="text" value="<%= zip %>" class="form-control" name="zip" id="inputZip">
+        <input type="text" value="<%- zip %>" class="form-control" name="zip" id="inputZip">
       </div>
     </div>
     <div class="form-group" data-el="country">
       <label for="inputCountry" class="col-md-3 control-label">Country</label>
       <div class="col-md-9">
-        <input type="text" value="<%= country %>" class="form-control" name="country" id="inputCountry">
+        <input type="text" value="<%- country %>" class="form-control" name="country" id="inputCountry">
       </div>
     </div>
     <div class="form-group" data-el="state">
       <label for="inputState" class="col-md-3 control-label">State</label>
       <div class="col-md-9">
-        <input type="text" value="<%= state %>" class="form-control" name="state" id="inputState">
+        <input type="text" value="<%- state %>" class="form-control" name="state" id="inputState">
       </div>
     </div>
   </fieldset>
@@ -61,7 +61,7 @@
     <legend>Additional notes</legend>
     <div class="form-group" data-el="notes">
       <div class="col-md-12">
-        <textarea class="form-control" rows="4" name="notes" id="inputNotes"><%= notes %></textarea>
+        <textarea class="form-control" rows="4" name="notes" id="inputNotes"><%- notes %></textarea>
       </div>
     </div>
     <div class="form-group">

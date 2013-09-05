@@ -28,7 +28,7 @@ window.ContactListItemView = Backbone.View.extend({
     },
 
     render:function () {
-        $(this.el).html(this.template(this.model.toJSON()));
+        $(this.el).html(this.template(this.model.toJSON(),{url:this.model.url()}));
         return this;
     }
 
@@ -67,7 +67,7 @@ window.ContactFormView = Backbone.View.extend({
         }
         this.model.save(data, {
             success: function (model) {
-                app.navigate("contact/"+model.id, true);
+                app.navigate(model.url(), true);
             },
             error: function (model, response) {
                 var $form = $("#contactform");

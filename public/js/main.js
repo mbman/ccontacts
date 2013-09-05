@@ -14,17 +14,14 @@ window.Router = Backbone.Router.extend({
     home: function () {
         if (!this.homeView) {
             this.homeView = new HomeView();
-            this.homeView.render();
-        } else {
-            this.homeView.delegateEvents();
         }
-        this.$content.html(this.homeView.el);
+        this.$content.html(this.homeView.render().el);
         this.headerView.select('menu-home');
-        this.headerView.search(false);
     },
 
     newContact: function () {
-        this.$content.html(new ContactNewView({model: new Contact()}).render().el);
+        this.contactNewView = new ContactNewView({model: new Contact()});
+        this.$content.html(this.contactNewView.render().el);
         this.headerView.select('menu-new');
     }
 
