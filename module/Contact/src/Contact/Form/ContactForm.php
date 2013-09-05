@@ -42,6 +42,15 @@ class ContactForm extends Form
             ),
         ));
         $this->add(array(
+            'name' => 'company',
+            'attributes' => array(
+                'type'  => 'text',
+            ),
+            'options' => array(
+                'label' => 'Company',
+            ),
+        ));
+        $this->add(array(
             'name' => 'job',
             'attributes' => array(
                 'type'  => 'text',
