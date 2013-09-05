@@ -52,6 +52,24 @@ window.ContactFormView = Backbone.View.extend({
     render:function () {
         $(this.el).html(this.template(this.model.toJSON()));
         return this;
-    }
+    },
+
+    events: {
+        "submit #contactform": "save"
+    },
+
+    save: function (event) {
+        event.preventDefault();
+        var formData = $("#contactform").serializeArray(),
+            data = {};
+        for (var key in formData) {
+            data[formData[key].name] = formData[key].value;
+        }
+        this.model.save(data, {
+            success: function (contact) {
+                console.log(contact.toJSON());
+            }
+        })
+    },
 
 });
