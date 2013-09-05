@@ -67,7 +67,7 @@ class Contact implements InputFilterAwareInterface
     protected $company;
 
     /**
-     * @ORM\Column(type="string",length=80,nullable=false)
+     * @ORM\Column(type="string",length=80,nullable=true)
      * @SWG\Property(name="job",type="string")
      * @var string
      */
@@ -81,28 +81,28 @@ class Contact implements InputFilterAwareInterface
     protected $address;
 
     /**
-     * @ORM\Column(type="string",length=255,nullable=true)
+     * @ORM\Column(type="string",length=120,nullable=true)
      * @SWG\Property(name="city",type="string")
      * @var string
      */
     protected $city;
 
     /**
-     * @ORM\Column(type="string",length=255,nullable=true)
+     * @ORM\Column(type="string",length=120,nullable=true)
      * @SWG\Property(name="state",type="string")
      * @var string
      */
     protected $state;
 
     /**
-     * @ORM\Column(type="string",length=20,nullable=true)
+     * @ORM\Column(type="string",length=10,nullable=true)
      * @SWG\Property(name="zip",type="string")
      * @var string
      */
     protected $zip;
 
     /**
-     * @ORM\Column(type="string",length=255,nullable=true)
+     * @ORM\Column(type="string",length=120,nullable=true)
      * @SWG\Property(name="country",type="string")
      * @var string
      */
@@ -372,32 +372,22 @@ class Contact implements InputFilterAwareInterface
         return $this->created;
     }
 
-    public function setStartDate($datetime)
+    /**
+     * Sets the last edit datetime to now
+     *
+     * @ORM\PreUpdate
+     */
+    public function setEdited()
     {
-        if ($datetime instanceof \DateTime) {
-            $this->startDate = $datetime;
-        } else {
-            $this->startDate =
-                $datetime != '' ? new \DateTime($datetime) : null;
-        }
-        return $this;
+        $this->edited = new \DateTime('now');
     }
 
     /**
      * @return DateTime
      */
-    public function getStartDate()
+    public function getEdited()
     {
-        return $this->startDate;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStartDateFormated($html5Format = false)
-    {
-        return $this->startDate !== null ?
-                    $this->startDate->format($html5Format ? 'Y-m-d\TH:i' : 'M-d-Y H:i') : '';
+        return $this->edited;
     }
 
     /**
@@ -424,9 +414,191 @@ class Contact implements InputFilterAwareInterface
 
             $inputFilter->add($factory->createInput(array(
                 'name' => 'id',
-                'required' => true,
+                'required' => false,
                 'filters' => array(
                     array('name' => 'Int'),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'firstName',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min' => 1,
+                            'max' => 255,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'lastName',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min' => 1,
+                            'max' => 255,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'company',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'max' => 255,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'job',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'max' => 80,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'address',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'max' => 255,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'city',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'max' => 120,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'state',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'max' => 120,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'zip',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'max' => 10,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'country',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'max' => 120,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'notes',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'max' => 255,
+                        ),
+                    ),
                 ),
             )));
 

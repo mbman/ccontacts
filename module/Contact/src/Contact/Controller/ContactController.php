@@ -4,6 +4,7 @@ namespace Contact\Controller;
 use Application\Controller\EntityUsingRestfulController;
 use Zend\View\Model\JsonModel;
 use Contact\Entity\Contact;
+use Contact\Form\ContactForm;
 use RuntimeException;
 use Swagger\Annotations as SWG;
 use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity as DoctrineHydrator;
@@ -58,6 +59,10 @@ class ContactController extends EntityUsingRestfulController
      *     )
      *   )
      * )
+     *
+     * RESTful get contacts list
+     *
+     * @return Zend\View\Model\JsonModel contacts data
      */
     public function getList()
     {
@@ -89,6 +94,10 @@ class ContactController extends EntityUsingRestfulController
      *     )
      *   )
      * )
+     *
+     * RESTful search contacts
+     *
+     * @return Zend\View\Model\JsonModel found contacts data
      */
     public function searchAction()
     {
@@ -105,18 +114,31 @@ class ContactController extends EntityUsingRestfulController
      *
      * @SWG\Api(
      *   path="/contact/{contactId}",
-     *   description="Contacts RESTful operations",
+     *   description="Find contact by ID",
      *   @SWG\Operations(
      *       @SWG\Operation(
-     *           httpMethod="GET", summary="Find contact by ID", notes="Returns a contact by ID",
+     *           httpMethod="GET", summary="Find contact by ID",
      *           responseClass="Contact",nickname="getContactById",
      *           @SWG\ErrorResponses(
      *               @SWG\ErrorResponse(code="404", reason="Contact not found")
-     *           )
+     *           ),
+     *           @SWG\Parameters(@SWG\Parameter(
+     *             name="id",
+     *             description="Contact ID",
+     *             paramType="path",
+     *             required="true",
+     *             allowMultiple="false",
+     *             dataType="int"
+     *           ))
      *       )
      *     )
      *   )
      * )
+     *
+     * RESTful get contact
+     *
+     * @param  int $id
+     * @return Zend\View\Model\JsonModel contact data
      */
     public function get($id)
     {
@@ -129,14 +151,84 @@ class ContactController extends EntityUsingRestfulController
         return new JsonModel($hydrator->extract($contact));
     }
 
+    /**
+     *
+     * @SWG\Api(
+     *   path="/contact",
+     *   description="Create contact",
+     *   @SWG\Operations(
+     *       @SWG\Operation(
+     *           httpMethod="POST", summary="Create contact",
+     *           responseClass="Contact",nickname="create",
+     *           @SWG\ErrorResponses(
+     *               @SWG\ErrorResponse(code="404", reason="Contact not found"),
+     *               @SWG\ErrorResponse(code="400", reason="Validation failed")
+     *           )
+     *       )
+     *     )
+     *   )
+     * )
+     *
+     * RESTful create contact
+     *
+     * @param  array $data
+     * @return Zend\View\Model\JsonModel contact data or error messages
+     */
     public function create($data)
     {
-        return new JsonModel();
+        return $this->update(0, $data);
     }
 
+
+    /**
+     *
+     * @SWG\Api(
+     *   path="/contact/{contactId}",
+     *   description="Update contact",
+     *   @SWG\Operations(
+     *       @SWG\Operation(
+     *           httpMethod="PUT", summary="Update contact",
+     *           responseClass="Contact",nickname="update",
+     *           @SWG\ErrorResponses(
+     *               @SWG\ErrorResponse(code="404", reason="Contact not found"),
+     *               @SWG\ErrorResponse(code="400", reason="Validation failed")
+     *           )
+     *       )
+     *     )
+     *   )
+     * )
+     *
+     * RESTful contact update
+     *
+     * @param  int $id
+     * @param  array $data
+     * @return Zend\View\Model\JsonModel contact data or error messages
+     */
     public function update($id, $data)
     {
-        return new JsonModel();
+        $contact = new Contact;
+        $em = $this->getEntityManager();
+        $form = new ContactForm($em);
+        if ($id > 0) {
+            $contact = $em->getRepository('Contact\Entity\Contact')->find($id);
+            if (!$contact) {
+                $this->getResponse()->setStatusCode(404);
+                return;
+            }
+        }
+        $contact->setEntityManager($em);
+        $form->bind($contact);
+        $form->setInputFilter($contact->getInputFilter());
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            $this->getResponse()->setStatusCode(400);
+            return new JsonModel($form->getMessages());
+        }
+        $em->persist($contact);
+        $em->flush();
+
+        return $this->get($contact->getId());
     }
 
     public function delete($id)
