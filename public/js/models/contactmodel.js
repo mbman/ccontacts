@@ -3,8 +3,6 @@ window.Contact = Backbone.Model.extend({
     urlRoot:"contact",
 
     initialize:function () {
-        this.reports = new ContactCollection();
-        this.reports.url = 'contact/' + this.id;
     }
 
 });
