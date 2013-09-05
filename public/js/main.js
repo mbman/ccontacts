@@ -2,10 +2,11 @@ window.Router = Backbone.Router.extend({
 
     routes: {
         "": "home",
-        "contact/:id": "contactDetails"
+        "contacts/new": "newContact"
     },
 
     initialize: function () {
+        this.$content = $("#content");
         this.headerView = new HeaderView();
         $('.header').html(this.headerView.render().el);
     },
@@ -17,14 +18,19 @@ window.Router = Backbone.Router.extend({
         } else {
             this.homeView.delegateEvents();
         }
-        $("#content").html(this.homeView.el);
+        this.$content.html(this.homeView.el);
         this.headerView.select('menu-home');
         this.headerView.search(false);
+    },
+
+    newContact: function () {
+        this.$content.html(new ContactNewView({model: new Contact()}).render().el);
+        this.headerView.select('menu-new');
     }
 
 });
 
-templateLoader.load(["HomeView", "HeaderView", "ContactListItemView"],
+templateLoader.load(["HomeView", "HeaderView", "ContactListItemView", "ContactNewView", "ContactFormView"],
     function () {
         app = new Router();
         Backbone.history.start();

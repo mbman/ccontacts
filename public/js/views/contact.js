@@ -33,3 +33,25 @@ window.ContactListItemView = Backbone.View.extend({
     }
 
 });
+
+window.ContactNewView = Backbone.View.extend({
+
+    render: function () {
+        $(this.el).html(this.template());
+        $('#contact-form', this.el).html(new ContactFormView({model:this.model}).render().el);
+        return this;
+    }
+});
+
+window.ContactFormView = Backbone.View.extend({
+
+    initialize:function () {
+        this.model.bind("change", this.render, this);
+    },
+
+    render:function () {
+        $(this.el).html(this.template(this.model.toJSON()));
+        return this;
+    }
+
+});
