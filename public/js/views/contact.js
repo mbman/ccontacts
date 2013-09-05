@@ -66,8 +66,11 @@ window.ContactFormView = Backbone.View.extend({
             data[formData[key].name] = formData[key].value;
         }
         this.model.save(data, {
-            success: function (contact) {
-                console.log(contact.toJSON());
+            success: function (model) {
+                app.navigate("contact/"+model.id, true);
+            },
+            error: function (model, response) {
+                $.each(response.responseJSON);
             }
         })
     },

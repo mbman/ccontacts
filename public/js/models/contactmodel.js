@@ -1,6 +1,18 @@
 window.Contact = Backbone.Model.extend({
 
     urlRoot:"contact",
+    defaults: {
+        firstName: "",
+        lastName: "",
+        company: "",
+        job: "",
+        address: "",
+        zip: "",
+        city: "",
+        state: "",
+        country: "",
+        notes: "",
+    },
 
     initialize:function () {
     }
