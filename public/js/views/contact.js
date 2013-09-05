@@ -66,10 +66,31 @@ window.ContactFormView = Backbone.View.extend({
             data[formData[key].name] = formData[key].value;
         }
         this.model.save(data, {
-            success: function (contact) {
-                console.log(contact.toJSON());
+            success: function (model) {
+                app.navigate("contact/"+model.id, true);
+            },
+            error: function (model, response) {
+                var $form = $("#contactform");
+                _.each(response.responseJSON, function (errors, key) {
+                    var $el = $("[data-el='"+key+"']", this);
+                    $el.addClass("has-error")
+                       .append(new ContactFormHelpView({model:errors}).render().el);
+                }, $form);
             }
-        })
+        });
+    },
+
+});
+
+
+window.ContactFormHelpView = Backbone.View.extend({
+
+    tagName: "span",
+    className: "help-block pull-right",
+
+    render:function () {
+        $(this.el).html(_.values(this.model).join("<br>"));
+        return this;
     },
 
 });
