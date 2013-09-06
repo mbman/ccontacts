@@ -25,10 +25,13 @@ window.ContactCollection = Backbone.Collection.extend({
 
     url:"contact",
 
-    search:function (key) {
+    searchQuery: "",
+
+    search:function (query) {
         var self = this;
+        this.searchQuery = query;
         $.ajax({
-            url:"contact"+(key ? "/search/" + key : ""),
+            url:"contact"+(query ? "/search/" + query : ""),
             dataType:"json",
             success:function (data) {
                 self.reset(data);

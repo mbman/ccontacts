@@ -3,7 +3,8 @@ window.Router = Backbone.Router.extend({
     routes: {
         "": "home",
         "contacts/new": "newContact",
-        "contact/:id/edit": "editContact"
+        "contact/:id/edit": "editContact",
+        "search/:query": "search"
     },
 
     initialize: function () {
@@ -17,6 +18,15 @@ window.Router = Backbone.Router.extend({
             this.homeView = new HomeView();
         }
         this.$content.html(this.homeView.render().el);
+        this.headerView.select('menu-home');
+    },
+
+    search: function (query) {
+        if (!this.searchView) {
+            this.searchView = new SearchView();
+        }
+        this.searchView.search(query);
+        this.$content.html(this.searchView.render().el);
         this.headerView.select('menu-home');
     },
 
@@ -38,7 +48,7 @@ window.Router = Backbone.Router.extend({
 
 });
 
-templateLoader.load(["HomeView", "HeaderView", "ContactListItemView", "ContactNewView", "ContactEditView", "ContactFormView"],
+templateLoader.load(["HomeView", "HeaderView", "SearchView", "ContactListItemView", "ContactNewView", "ContactEditView", "ContactFormView"],
     function () {
         app = new Router();
         Backbone.history.start();
