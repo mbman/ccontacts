@@ -46,6 +46,9 @@ window.ContactListItemView = Backbone.View.extend({
         if (!confirm("Delete contact '"+contact.firstName+" "+contact.lastName+"'")) {
             return false;
         }
+        app.headerView.alert("Well done, the contact <strong>"+
+                        contact.firstName+" "+contact.lastName+
+                        "</strong> has been deleted!", "success");
         this.model.destroy();
         this.remove();
     },
@@ -88,9 +91,14 @@ window.ContactFormView = Backbone.View.extend({
         }
         this.model.save(data, {
             success: function (model) {
+                app.headerView.alert("Well done, the contact <strong>"+
+                        model.get("firstName")+" "+model.get("lastName")+
+                        "</strong> has been saved!", "success");
                 app.navigate(model.url(), true);
             },
             error: function (model, response) {
+                app.headerView.alert("<strong>Error</strong>, you did not fill out the form correctly."+
+                    " Please correct all of the errors marked red.", "danger");
                 var $form = $("#contactform");
                 _.each(response.responseJSON, function (errors, key) {
                     var $el = $("[data-el='"+key+"']", this);
