@@ -192,7 +192,15 @@ class ContactController extends EntityUsingRestfulController
      *           @SWG\ErrorResponses(
      *               @SWG\ErrorResponse(code="404", reason="Contact not found"),
      *               @SWG\ErrorResponse(code="400", reason="Validation failed")
-     *           )
+     *           ),
+     *           @SWG\Parameters(@SWG\Parameter(
+     *             name="id",
+     *             description="Contact ID",
+     *             paramType="path",
+     *             required="true",
+     *             allowMultiple="false",
+     *             dataType="int"
+     *           ))
      *       )
      *     )
      *   )
