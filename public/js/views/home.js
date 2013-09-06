@@ -8,8 +8,8 @@ window.HomeView = Backbone.View.extend({
     render:function () {
         $(this.el).html(this.template())
                   .append(this.contactsListView.render().el);
-        this.contacts.search(false);
+        this.contacts.fetch();
         return this;
-    }
+    },
 
 });
