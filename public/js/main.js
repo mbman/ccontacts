@@ -48,7 +48,7 @@ window.Router = Backbone.Router.extend({
 
 });
 
-templateLoader.load(["HomeView", "HeaderView", "SearchView", "ContactListItemView", "ContactNewView", "ContactEditView", "ContactFormView"],
+templateLoader.load(["HomeView", "HeaderView", "AlertView", "SearchView", "ContactListItemView", "ContactNewView", "ContactEditView", "ContactFormView"],
     function () {
         app = new Router();
         Backbone.history.start();
