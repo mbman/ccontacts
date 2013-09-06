@@ -35,22 +35,17 @@ window.ContactListItemView = Backbone.View.extend({
 
 });
 
-window.ContactNewView = Backbone.View.extend({
+var contactFormBaseView = {
 
     render: function () {
         $(this.el).html(this.template(this.model.toJSON()));
         $('#contact-form', this.el).html(new ContactFormView({model:this.model}).render().el);
         return this;
     }
-});
-window.ContactEditView = Backbone.View.extend({
+};
 
-    render: function () {
-        $(this.el).html(this.template(this.model.toJSON()));
-        $('#contact-form', this.el).html(new ContactFormView({model:this.model}).render().el);
-        return this;
-    }
-});
+window.ContactNewView = Backbone.View.extend(contactFormBaseView);
+window.ContactEditView = Backbone.View.extend(contactFormBaseView);
 
 window.ContactFormView = Backbone.View.extend({
 
