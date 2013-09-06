@@ -21,6 +21,7 @@ window.ContactListView = Backbone.View.extend({
 
 window.ContactListItemView = Backbone.View.extend({
 
+    tagName: "li",
     className:"list-group-item clearfix",
 
     initialize:function () {
