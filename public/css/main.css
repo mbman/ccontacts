@@ -1,3 +1,6 @@
 body {
 padding-top: 50px;
 }
+.contact-list small {
+display: block;
+}
