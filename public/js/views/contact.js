@@ -24,6 +24,10 @@ window.ContactListItemView = Backbone.View.extend({
     tagName: "li",
     className:"list-group-item clearfix",
 
+    events: {
+        "click .delete": "delete"
+    },
+
     initialize:function () {
         this.model.bind("change", this.render, this);
         this.model.bind("destroy", this.close, this);
@@ -32,7 +36,19 @@ window.ContactListItemView = Backbone.View.extend({
     render:function () {
         $(this.el).html(this.template(this.model.toJSON(),{url:this.model.url()}));
         return this;
-    }
+    },
+
+    delete: function (event) {
+        if (event != false) {
+            event.preventDefault();
+        }
+        var contact = this.model.toJSON();
+        if (!confirm("Delete contact '"+contact.firstName+" "+contact.lastName+"'")) {
+            return false;
+        }
+        this.model.destroy();
+        this.remove();
+    },
 
 });
 

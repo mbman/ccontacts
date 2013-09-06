@@ -1,6 +1,6 @@
-<a class="pull-left" title="More info" href="#contact/<%- id %>"><strong><%- firstName %> <%- lastName %></strong>
+<a class="pull-left" title="More info" href="#contact/<%- id %>"><strong><%- firstName+" "+lastName %></strong>
 <small><%- job+(job && company ? ", " : "")+company %></small></a>
 <div class="btn-group btn-group-xs pull-right">
   <a href="#contact/<%- id %>/edit" class="btn btn-warning">Edit</a>
-  <a href="#contact/<%- id %>/delete" class="btn btn-danger">Delete</a>
+  <a href="#" class="btn delete btn-danger">Delete</a>
 </div>
