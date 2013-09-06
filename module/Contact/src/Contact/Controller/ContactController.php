@@ -192,7 +192,15 @@ class ContactController extends EntityUsingRestfulController
      *           @SWG\ErrorResponses(
      *               @SWG\ErrorResponse(code="404", reason="Contact not found"),
      *               @SWG\ErrorResponse(code="400", reason="Validation failed")
-     *           )
+     *           ),
+     *           @SWG\Parameters(@SWG\Parameter(
+     *             name="id",
+     *             description="Contact ID",
+     *             paramType="path",
+     *             required="true",
+     *             allowMultiple="false",
+     *             dataType="int"
+     *           ))
      *       )
      *     )
      *   )
@@ -231,8 +239,47 @@ class ContactController extends EntityUsingRestfulController
         return $this->get($contact->getId());
     }
 
+
+    /**
+     *
+     * @SWG\Api(
+     *   path="/contact/{contactId}",
+     *   description="Delete a contact by ID",
+     *   @SWG\Operations(
+     *       @SWG\Operation(
+     *           httpMethod="DELETE", summary=Delete a contact by ID",
+     *           nickname="deleteContactById",
+     *           @SWG\ErrorResponses(
+     *               @SWG\ErrorResponse(code="404", reason="Contact not found")
+     *           ),
+     *           @SWG\Parameters(@SWG\Parameter(
+     *             name="id",
+     *             description="Contact ID",
+     *             paramType="path",
+     *             required="true",
+     *             allowMultiple="false",
+     *             dataType="int"
+     *           ))
+     *       )
+     *     )
+     *   )
+     * )
+     *
+     * RESTful delete contact
+     *
+     * @param  int $id
+     * @return Zend\View\Model\JsonModel contact data
+     */
     public function delete($id)
     {
-        return new JsonModel();
+        $contact = $this->getContactRepository()->find($id);
+        if (!$contact) {
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+        $em = $this->getEntityManager();
+        $em->remove($contact);
+        $em->flush();
+        return new JsonModel(array('success' => true));
     }
 }
