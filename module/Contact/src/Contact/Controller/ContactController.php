@@ -247,7 +247,7 @@ class ContactController extends EntityUsingRestfulController
      *   description="Delete a contact by ID",
      *   @SWG\Operations(
      *       @SWG\Operation(
-     *           httpMethod="DELETE", summary=Delete a contact by ID",
+     *           httpMethod="DELETE", summary="Delete a contact by ID",
      *           nickname="deleteContactById",
      *           @SWG\ErrorResponses(
      *               @SWG\ErrorResponse(code="404", reason="Contact not found")
