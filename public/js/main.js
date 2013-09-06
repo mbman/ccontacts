@@ -2,7 +2,8 @@ window.Router = Backbone.Router.extend({
 
     routes: {
         "": "home",
-        "contacts/new": "newContact"
+        "contacts/new": "newContact",
+        "contact/:id/edit": "editContact"
     },
 
     initialize: function () {
@@ -14,23 +15,30 @@ window.Router = Backbone.Router.extend({
     home: function () {
         if (!this.homeView) {
             this.homeView = new HomeView();
-            this.homeView.render();
-        } else {
-            this.homeView.delegateEvents();
         }
-        this.$content.html(this.homeView.el);
+        this.$content.html(this.homeView.render().el);
         this.headerView.select('menu-home');
-        this.headerView.search(false);
     },
 
     newContact: function () {
-        this.$content.html(new ContactNewView({model: new Contact()}).render().el);
+        this.contactNewView = new ContactNewView({model: new Contact()});
+        this.$content.html(this.contactNewView.render().el);
         this.headerView.select('menu-new');
+    },
+
+    editContact: function (id) {
+        var contact = new Contact({id: id}), self = this;
+        contact.fetch({
+            success: function (data) {
+                self.$content.html(new ContactEditView({model: data}).render().el);
+                self.headerView.select('menu-home');
+            }
+        });
     }
 
 });
 
-templateLoader.load(["HomeView", "HeaderView", "ContactListItemView", "ContactNewView", "ContactFormView"],
+templateLoader.load(["HomeView", "HeaderView", "ContactListItemView", "ContactNewView", "ContactEditView", "ContactFormView"],
     function () {
         app = new Router();
         Backbone.history.start();

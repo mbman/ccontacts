@@ -1,4 +1,6 @@
 window.ContactListView = Backbone.View.extend({
+    tagName: "ol",
+    className: "contact-list list-group",
 
     initialize:function () {
         var self = this;
@@ -19,8 +21,12 @@ window.ContactListView = Backbone.View.extend({
 
 window.ContactListItemView = Backbone.View.extend({
 
-    tagName:"div",
-    className:"col-md-6",
+    tagName: "li",
+    className:"list-group-item clearfix",
+
+    events: {
+        "click .delete": "delete"
+    },
 
     initialize:function () {
         this.model.bind("change", this.render, this);
@@ -28,20 +34,35 @@ window.ContactListItemView = Backbone.View.extend({
     },
 
     render:function () {
-        $(this.el).html(this.template(this.model.toJSON()));
+        $(this.el).html(this.template(this.model.toJSON(),{url:this.model.url()}));
         return this;
-    }
+    },
+
+    delete: function (event) {
+        if (event != false) {
+            event.preventDefault();
+        }
+        var contact = this.model.toJSON();
+        if (!confirm("Delete contact '"+contact.firstName+" "+contact.lastName+"'")) {
+            return false;
+        }
+        this.model.destroy();
+        this.remove();
+    },
 
 });
 
-window.ContactNewView = Backbone.View.extend({
+var contactFormBaseView = {
 
     render: function () {
-        $(this.el).html(this.template());
+        $(this.el).html(this.template(this.model.toJSON()));
         $('#contact-form', this.el).html(new ContactFormView({model:this.model}).render().el);
         return this;
     }
-});
+};
+
+window.ContactNewView = Backbone.View.extend(contactFormBaseView);
+window.ContactEditView = Backbone.View.extend(contactFormBaseView);
 
 window.ContactFormView = Backbone.View.extend({
 
@@ -67,7 +88,7 @@ window.ContactFormView = Backbone.View.extend({
         }
         this.model.save(data, {
             success: function (model) {
-                app.navigate("contact/"+model.id, true);
+                app.navigate(model.url(), true);
             },
             error: function (model, response) {
                 var $form = $("#contactform");
