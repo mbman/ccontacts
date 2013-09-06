@@ -1,4 +1,6 @@
 window.ContactListView = Backbone.View.extend({
+    tagName: "ol",
+    className: "contact-list list-group",
 
     initialize:function () {
         var self = this;
@@ -19,8 +21,7 @@ window.ContactListView = Backbone.View.extend({
 
 window.ContactListItemView = Backbone.View.extend({
 
-    tagName:"div",
-    className:"col-md-6",
+    className:"list-group-item clearfix",
 
     initialize:function () {
         this.model.bind("change", this.render, this);
