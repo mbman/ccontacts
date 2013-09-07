@@ -19,10 +19,7 @@ window.ContactListView = Backbone.View.extend({
     }
 });
 
-window.ContactListItemView = Backbone.View.extend({
-
-    tagName: "li",
-    className:"list-group-item clearfix",
+window.ContactView = Backbone.View.extend({
 
     events: {
         "click .delete": "delete"
@@ -38,34 +35,42 @@ window.ContactListItemView = Backbone.View.extend({
         return this;
     },
 
-    delete: function (event) {
+    delete: function deleteContact(event){
         if (event != false) {
             event.preventDefault();
         }
-        var contact = this.model.toJSON();
-        if (!confirm("Delete contact '"+contact.firstName+" "+contact.lastName+"'")) {
+        if (!confirm("Delete contact '"+this.model.fullName()+"'")) {
             return false;
         }
-        app.headerView.alert("Well done, the contact <strong>"+
-                        contact.firstName+" "+contact.lastName+
-                        "</strong> has been deleted!", "success");
+        app.headerView.alert("Well done, the contact <strong>"+this.model.fullName()+
+                             "</strong> has been deleted!", "success");
         this.model.destroy();
         this.remove();
     },
 
 });
 
-var contactFormBaseView = {
+window.ContactListItemView = window.ContactView.extend({
+
+    tagName: "li",
+    className:"list-group-item clearfix",
+
+    initialize:function () {
+        this.model.bind("change", this.render, this);
+        this.model.bind("destroy", this.close, this);
+    },
+
+});
+
+window.ContactNewView = Backbone.View.extend({
 
     render: function () {
         $(this.el).html(this.template(this.model.toJSON()));
         $('#contact-form', this.el).html(new ContactFormView({model:this.model}).render().el);
         return this;
     }
-};
-
-window.ContactNewView = Backbone.View.extend(contactFormBaseView);
-window.ContactEditView = Backbone.View.extend(contactFormBaseView);
+});
+window.ContactEditView = window.ContactNewView.extend();
 
 window.ContactFormView = Backbone.View.extend({
 
@@ -91,9 +96,8 @@ window.ContactFormView = Backbone.View.extend({
         }
         this.model.save(data, {
             success: function (model) {
-                app.headerView.alert("Well done, the contact <strong>"+
-                        model.get("firstName")+" "+model.get("lastName")+
-                        "</strong> has been saved!", "success");
+                app.headerView.alert("Well done, the contact <strong>"+model.fullName()+
+                                     "</strong> has been saved!", "success");
                 app.navigate(model.url(), true);
             },
             error: function (model, response) {

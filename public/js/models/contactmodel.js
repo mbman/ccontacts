@@ -14,7 +14,8 @@ window.Contact = Backbone.Model.extend({
         notes: "",
     },
 
-    initialize:function () {
+    fullName:function () {
+        return this.get("firstName")+" "+this.get("lastName");
     }
 
 });
