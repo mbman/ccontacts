@@ -1,0 +1,9 @@
+<div class="page-header">
+<h1><%- firstName+" "+lastName %></h1>
+</div>
+<a class="pull-left" title="More info" href="#contact/<%- id %>"><strong></strong>
+<small><%- job+(job && company ? ", " : "")+company %></small></a>
+<div class="btn-group btn-group-xs pull-right">
+  <a href="#contact/<%- id %>/edit" class="btn btn-warning">Edit</a>
+  <a href="#" class="btn delete btn-danger">Delete</a>
+</div>

@@ -48,3 +48,13 @@ window.AlertView = Backbone.View.extend({
     },
 
 });
+
+window.LoaderView = Backbone.View.extend({
+    className: "panel panel-info",
+
+    render: function() {
+        $(this.el).html(this.template());
+        return this;
+    },
+
+});

@@ -4,6 +4,7 @@ window.Router = Backbone.Router.extend({
         "": "home",
         "contacts/new": "newContact",
         "contact/:id/edit": "editContact",
+        "contact/:id": "viewContact",
         "search/:query": "search"
     },
 
@@ -25,8 +26,7 @@ window.Router = Backbone.Router.extend({
         if (!this.searchView) {
             this.searchView = new SearchView();
         }
-        this.searchView.search(query);
-        this.$content.html(this.searchView.render().el);
+        this.$content.html(this.searchView.render(query).el);
         this.headerView.select('menu-home');
     },
 
@@ -44,6 +44,16 @@ window.Router = Backbone.Router.extend({
                 self.headerView.select('menu-home');
             }
         });
+    },
+
+    viewContact: function (id) {
+        var contact = new Contact({id: id}), self = this;
+        contact.fetch({
+            success: function (data) {
+                self.$content.html(new ContactView({model: data}).render().el);
+                self.headerView.select('menu-home');
+            }
+        });
     }
 
 });
@@ -52,7 +62,9 @@ templateLoader.load([
     "HomeView",
     "HeaderView",
     "AlertView",
+    "LoaderView",
     "SearchView",
+    "ContactView",
     "ContactListItemView",
     "ContactNewView",
     "ContactEditView",
