@@ -27,9 +27,6 @@ window.ContactView = Backbone.View.extend({
 
     initialize:function () {
         this.model.bind("change", this.render, this);
-        this.model.bind("destroy", function(){
-            app.navigate("", true);
-        });
     },
 
     render:function () {
@@ -38,7 +35,6 @@ window.ContactView = Backbone.View.extend({
     },
 
     delete: function(event){
-        console.log("delete");
         if (event != false) {
             event.preventDefault();
         }
@@ -48,8 +44,12 @@ window.ContactView = Backbone.View.extend({
         app.headerView.alert("Well done, the contact <strong>"+this.model.fullName()+
                              "</strong> has been deleted!", "success");
         this.model.destroy();
-        this.remove();
+        this.destroy();
     },
+
+    destroy: function(){
+        app.navigate("", true);
+    }
 
 });
 
@@ -58,10 +58,9 @@ window.ContactListItemView = window.ContactView.extend({
     tagName: "li",
     className:"list-group-item clearfix",
 
-    initialize:function () {
-        this.model.bind("change", this.render, this);
-        this.model.bind("destroy", this.close, this);
-    },
+    destroy: function(){
+        this.remove();
+    }
 
 });
 
