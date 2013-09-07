@@ -27,7 +27,9 @@ window.ContactView = Backbone.View.extend({
 
     initialize:function () {
         this.model.bind("change", this.render, this);
-        this.model.bind("destroy", this.close, this);
+        this.model.bind("destroy", function(){
+            app.navigate("", true);
+        });
     },
 
     render:function () {
@@ -36,6 +38,7 @@ window.ContactView = Backbone.View.extend({
     },
 
     delete: function(event){
+        console.log("delete");
         if (event != false) {
             event.preventDefault();
         }

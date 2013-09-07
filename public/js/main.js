@@ -15,17 +15,13 @@ window.Router = Backbone.Router.extend({
     },
 
     home: function () {
-        if (!this.homeView) {
-            this.homeView = new HomeView();
-        }
+        this.homeView = new HomeView();
         this.$content.html(this.homeView.render().el);
         this.headerView.select('menu-home');
     },
 
     search: function (query) {
-        if (!this.searchView) {
-            this.searchView = new SearchView();
-        }
+        this.searchView = new SearchView();
         this.$content.html(this.searchView.render(query).el);
         this.headerView.select('menu-home');
     },
