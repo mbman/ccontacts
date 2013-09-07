@@ -35,7 +35,7 @@ window.ContactView = Backbone.View.extend({
         return this;
     },
 
-    delete: function deleteContact(event){
+    delete: function(event){
         if (event != false) {
             event.preventDefault();
         }
@@ -102,7 +102,7 @@ window.ContactFormView = Backbone.View.extend({
             },
             error: function (model, response) {
                 app.headerView.alert("<strong>Error</strong>, you did not fill out the form correctly."+
-                    " Please correct all of the errors marked red.", "danger");
+                                     " Please correct all of the errors marked red.", "danger");
                 var $form = $("#contactform");
                 _.each(response.responseJSON, function (errors, key) {
                     var $el = $("[data-el='"+key+"']", this);
