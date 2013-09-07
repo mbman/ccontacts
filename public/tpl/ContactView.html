@@ -1,9 +1,25 @@
-<div class="page-header">
-<h1><%- firstName+" "+lastName %></h1>
+<div class="page-header clearfix">
+  <h1><%- firstName+" "+lastName %></h1>
 </div>
-<a class="pull-left" title="More info" href="#contact/<%- id %>"><strong></strong>
-<small><%- job+(job && company ? ", " : "")+company %></small></a>
-<div class="btn-group btn-group-xs pull-right">
+<div class="row">
+<div class="btn-group btn-group-sm pull-right">
   <a href="#contact/<%- id %>/edit" class="btn btn-warning">Edit</a>
   <a href="#" class="btn delete btn-danger">Delete</a>
+</div>
+<dl class="dl-horizontal">
+  <dt>Position/job:</dt>
+  <dd><%- job||"-" %></dd>
+  <dt>Company:</dt>
+  <dd><%- company||"-" %></dd>
+  <dt>Address:</dt>
+  <dd><address><%- address %><br>
+      <%- city + " " + zip + " " + state %><br>
+      <%- country %></address></dd>
+</dl>
+<dl class="dl-horizontal">
+  <dt>Created on:</dt>
+  <dd><%- moment(created.date).format("llll") %></dd>
+  <dt>Last edited:</dt>
+  <dd><%- edited ? moment(edited.date).format("llll") : "-" %></dd>
+</dl>
 </div>
