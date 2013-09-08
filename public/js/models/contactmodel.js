@@ -11,6 +11,7 @@ window.Contact = Backbone.Model.extend({
         city: "",
         state: "",
         country: "",
+        tags: "",
         notes: "",
     },
 
