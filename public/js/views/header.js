@@ -14,7 +14,17 @@ window.HeaderView = Backbone.View.extend({
         if (event != false) {
             event.preventDefault();
         }
-        window.location.hash = "search/"+$('#search-q').val();
+        var $query = $('#search-q'),
+            query =  $.trim($query.val()),
+            $parent = $query.parent();
+        if (!query.length) {
+            $query.val("").focus();
+            $parent.addClass("has-error");
+            return false;
+        }
+        $parent.removeClass("has-error");
+        window.location.hash = "search/"+query;
+        return true;
     },
 
     onkeypress: function(event) {
