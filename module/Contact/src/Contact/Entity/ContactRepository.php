@@ -9,6 +9,8 @@ class ContactRepository extends EntityRepository
         'c.lastName',
         'c.company',
         'c.city',
+        'c.job',
+        'c.tags',
         );
     /**
      * Returns all contacts who match $searchTerm in their name, company, tag,
