@@ -1,25 +1,31 @@
 <div class="page-header clearfix">
   <h1><%- firstName+" "+lastName %></h1>
-</div>
-<div class="row">
-<div class="btn-group btn-group-sm pull-right">
+<div class="btn-group btn-group-xs">
   <a href="#contact/<%- id %>/edit" class="btn btn-warning">Edit</a>
   <a href="#" class="btn delete btn-danger">Delete</a>
 </div>
+</div>
+<div class="row contact">
+<dl class="dl-horizontal text-muted">
+  <dt>Created on:</dt>
+  <dd><%- moment(created.date).format("llll") %></dd>
+  <dt>Last edited:</dt>
+  <dd><%- edited ? moment(edited.date).format("llll") : "-" %></dd>
+</dl>
 <dl class="dl-horizontal">
   <dt>Position/job:</dt>
   <dd><%- job||"-" %></dd>
   <dt>Company:</dt>
   <dd><%- company||"-" %></dd>
   <dt>Address:</dt>
-  <dd><address><%- address %><br>
-      <%- city + " " + zip + " " + state %><br>
-      <%- country %></address></dd>
+  <dd><address><span><%- address %></span>
+      <span><%- city + " " + zip + " " + state %></span>
+      <span><%- country %></span></address></dd>
 </dl>
 <dl class="dl-horizontal">
-  <dt>Created on:</dt>
-  <dd><%- moment(created.date).format("llll") %></dd>
-  <dt>Last edited:</dt>
-  <dd><%- edited ? moment(edited.date).format("llll") : "-" %></dd>
+  <dt>Tags:</dt>
+  <dd><%- tags||"-" %></dd>
+  <dt>Notes:</dt>
+  <dd><%- notes||"-" %></dd>
 </dl>
 </div>

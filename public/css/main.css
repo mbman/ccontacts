@@ -7,3 +7,9 @@ margin-top: 0;
 .contact-list small {
 display: block;
 }
+.contact address span {
+display: block;
+}
+.contact .btn-group {
+margin-top: -10px;
+}
