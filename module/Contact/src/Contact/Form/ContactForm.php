@@ -105,6 +105,15 @@ class ContactForm extends Form
             ),
         ));
         $this->add(array(
+            'name' => 'tags',
+            'attributes' => array(
+                'type'  => 'text',
+            ),
+            'options' => array(
+                'label' => 'Tags',
+            ),
+        ));
+        $this->add(array(
             'name' => 'notes',
             'type' => 'Textarea',
             'options' => array(

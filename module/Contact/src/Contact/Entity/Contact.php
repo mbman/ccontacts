@@ -14,7 +14,14 @@ use Swagger\Annotations as SWG;
 /**
 * @ORM\Entity(repositoryClass="ContactRepository")
 * @ORM\HasLifecycleCallbacks
-* @ORM\Table(indexes={@ORM\Index(name="search_idx", columns={"firstName", "lastName","company","city"})})
+* @ORM\Table(indexes={
+*     @ORM\Index(name="fullName", columns={"firstName","lastName"}),
+*     @ORM\Index(name="firstName", columns={"firstName"}),
+*     @ORM\Index(name="lastName", columns={"lastName"}),
+*     @ORM\Index(name="job", columns={"job"}),
+*     @ORM\Index(name="company", columns={"company"}),
+*     @ORM\Index(name="city", columns={"city"}),
+*     @ORM\Index(name="tags", columns={"tags"})})
 *
 * @SWG\Model(id="Contact")
 */
@@ -107,6 +114,13 @@ class Contact implements InputFilterAwareInterface
      * @var string
      */
     protected $country;
+
+    /**
+     * @ORM\Column(type="string",length=255,nullable=true)
+     * @SWG\Property(name="tags",type="string")
+     * @var string
+     */
+    protected $tags;
 
     /**
      * @ORM\Column(type="string",length=255,nullable=true)
@@ -286,6 +300,24 @@ class Contact implements InputFilterAwareInterface
     public function getNotes()
     {
         return $this->notes;
+    }
+
+    /**
+     * @param string $tags
+     * @return Contact
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 
     /**
@@ -579,6 +611,24 @@ class Contact implements InputFilterAwareInterface
                         'options' => array(
                             'encoding' => 'UTF-8',
                             'max' => 120,
+                        ),
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'tags',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'max' => 255,
                         ),
                     ),
                 ),
