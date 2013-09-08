@@ -1,11 +1,17 @@
 <div class="page-header clearfix">
   <h1><%- firstName+" "+lastName %></h1>
-</div>
-<div class="row contact">
-<div class="btn-group btn-group-sm pull-right">
+<div class="btn-group btn-group-xs">
   <a href="#contact/<%- id %>/edit" class="btn btn-warning">Edit</a>
   <a href="#" class="btn delete btn-danger">Delete</a>
 </div>
+</div>
+<div class="row contact">
+<dl class="dl-horizontal text-muted">
+  <dt>Created on:</dt>
+  <dd><%- moment(created.date).format("llll") %></dd>
+  <dt>Last edited:</dt>
+  <dd><%- edited ? moment(edited.date).format("llll") : "-" %></dd>
+</dl>
 <dl class="dl-horizontal">
   <dt>Position/job:</dt>
   <dd><%- job||"-" %></dd>
@@ -17,9 +23,7 @@
       <span><%- country %></span></address></dd>
 </dl>
 <dl class="dl-horizontal">
-  <dt>Created on:</dt>
-  <dd><%- moment(created.date).format("llll") %></dd>
-  <dt>Last edited:</dt>
-  <dd><%- edited ? moment(edited.date).format("llll") : "-" %></dd>
+  <dt>Notes:</dt>
+  <dd><%- notes||"-" %></dd>
 </dl>
 </div>
