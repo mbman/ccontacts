@@ -23,6 +23,15 @@
       <span><%- country %></span></address></dd>
 </dl>
 <dl class="dl-horizontal">
+  <dt>E-mail:</dt>
+  <dd>
+   <% _.each(emails, function(email){
+    var em = _.escape(email.email);
+        print('<a href="mailto:'+em+'">'+em+'</a><br>');
+    }); %>
+  </dd>
+</dl>
+<dl class="dl-horizontal">
   <dt>Tags:</dt>
   <dd><%= this.options.model.getTagsLinks().join(", ") %></dd>
   <dt>Notes:</dt>
