@@ -136,6 +136,12 @@ class Contact implements InputFilterAwareInterface
     protected $emails;
 
     /**
+     * @ORM\OneToMany(targetEntity="Contact\Entity\Phone",mappedBy="contact",cascade={"persist","refresh","remove"})
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * */
+    protected $phones;
+
+    /**
      * @var ContactRepository
      */
     protected $repository;
@@ -154,6 +160,7 @@ class Contact implements InputFilterAwareInterface
     public function __construct()
     {
         $this->emails = new ArrayCollection();
+        $this->phones = new ArrayCollection();
     }
 
     public function setEntityManager(\Doctrine\ORM\EntityManager $entityManager)
@@ -459,6 +466,38 @@ class Contact implements InputFilterAwareInterface
     public function getEmails()
     {
         return $this->emails;
+    }
+
+    /** @param Phone $phone */
+    public function addPhone(Phone $phone) {
+        if (!$phone->getPhone()) {
+            return false;
+        }
+        $phone->setContact($this);
+        $this->phones->add($phone);
+    }
+
+    public function addPhones(Collection $phones)
+    {
+        foreach ($phones as $phone) {
+            $this->addPhone($phone);
+        }
+    }
+
+    public function removePhones(Collection $phones)
+    {
+        foreach ($phones as $phone) {
+            $phone->setContact(null);
+            $this->phones->removeElement($phone);
+        }
+    }
+
+    /**
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getPhones()
+    {
+        return $this->phones;
     }
 
     /**

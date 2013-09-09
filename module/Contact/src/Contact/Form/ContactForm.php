@@ -125,12 +125,26 @@ class ContactForm extends Form
             'type' => 'Collection',
             'options' => array(
                 'label' => 'Emails',
-                'should_create_template' => true,
+                'should_create_template' => false,
                 'allowAdd' => true,
-                'count' => 1,
+                'count' => 0,
                 'template_placeholder' => '__placeholder__',
                 'target_element' => array(
                     'type' => 'Contact\Form\EmailFieldset',
+                ),
+            ),
+        ));
+        $this->add(array(
+            'name' => 'phones',
+            'type' => 'Collection',
+            'options' => array(
+                'label' => 'Phones',
+                'should_create_template' => false,
+                'allowAdd' => true,
+                'count' => 0,
+                'template_placeholder' => '__placeholder__',
+                'target_element' => array(
+                    'type' => 'Contact\Form\PhoneFieldset',
                 ),
             ),
         ));

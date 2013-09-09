@@ -85,11 +85,13 @@ window.ContactFormView = Backbone.View.extend({
     initialize:function () {
         this.model.bind("reset", this.render, this);
         this.emailListView = new ContactFormEmailListView({model: this.model.get("emails")});
+        this.phoneListView = new ContactFormPhoneListView({model: this.model.get("phones")});
     },
 
     render:function () {
         $(this.el).html(this.template(this.model.toJSON()));
         $(".contact-emails", this.el).html(this.emailListView.render().el).show();
+        $(".contact-phones", this.el).html(this.phoneListView.render().el).show();
         return this;
     },
 
@@ -100,6 +102,7 @@ window.ContactFormView = Backbone.View.extend({
 
     addPhone: function(event){
         event.preventDefault();
+        this.model.phones().add(new ContactPhone());
     },
 
     save: function (event) {
@@ -154,14 +157,11 @@ window.ContactFormEmailListView = Backbone.View.extend({
 window.ContactFormEmailItemView = Backbone.View.extend({
 
     events: {
-        "click [data-delete]": "delete"
+        "click [data-delete]": "delete",
+        "change input": "updateModel"
     },
 
     className: "form-group",
-
-    initialize:function () {
-        this.model.bind("change", this.render, this);
-    },
 
     render:function () {
         $(this.el).html(this.template(this.model.toJSON()));
@@ -169,8 +169,41 @@ window.ContactFormEmailItemView = Backbone.View.extend({
     },
 
     delete: function() {
-        this.model.destroy();
+        this.model.collection.remove(this.model);
         this.remove();
+    },
+
+    updateModel: function() {
+        this.model.set("email", $("input", this.el).val());
+    }
+
+});
+
+window.ContactFormPhoneItemView = ContactFormEmailItemView.extend({
+
+    updateModel: function() {
+        this.model.set("phone", $("input", this.el).val());
+    }
+
+});
+
+
+window.ContactFormPhoneListView = Backbone.View.extend({
+
+    initialize:function () {
+        var self = this;
+        this.model.bind("reset", this.render, this);
+        this.model.bind("add", function (phone) {
+            $(self.el).append(new ContactFormPhoneItemView({model:phone}).render().el);
+        });
+    },
+
+    render:function () {
+        $(this.el).empty();
+        _.each(this.model.models, function (phone) {
+            $(this.el).append(new ContactFormPhoneItemView({model:phone}).render().el);
+        }, this);
+        return this;
     }
 
 });

@@ -60,7 +60,6 @@ window.ContactCollection = Backbone.Collection.extend({
 window.ContactEmail = Backbone.Model.extend({
 
     defaults: {
-        contact_id: 0,
         email: "",
     },
 
@@ -72,6 +71,21 @@ window.ContactEmailCollection = Backbone.Collection.extend({
 
 });
 
+window.ContactPhone = Backbone.Model.extend({
+
+    defaults: {
+        phone: "",
+    },
+
+});
+
+window.ContactPhoneCollection = Backbone.Collection.extend({
+
+    model: ContactPhone,
+
+});
+
 Backbone.associate(Contact, {
-  emails: { type: ContactEmailCollection, url: '/emails' }
+  emails: { type: ContactEmailCollection, url: '/email' },
+  phones: { type: ContactPhoneCollection, url: '/phone' }
 });
