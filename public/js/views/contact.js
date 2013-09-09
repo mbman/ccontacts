@@ -154,14 +154,11 @@ window.ContactFormEmailListView = Backbone.View.extend({
 window.ContactFormEmailItemView = Backbone.View.extend({
 
     events: {
-        "click [data-delete]": "delete"
+        "click [data-delete]": "delete",
+        "change input[type=email]": "updateEmail"
     },
 
     className: "form-group",
-
-    initialize:function () {
-        this.model.bind("change", this.render, this);
-    },
 
     render:function () {
         $(this.el).html(this.template(this.model.toJSON()));
@@ -169,8 +166,12 @@ window.ContactFormEmailItemView = Backbone.View.extend({
     },
 
     delete: function() {
-        this.model.destroy();
+        this.model.collection.remove(this.model);
         this.remove();
+    },
+
+    updateEmail: function() {
+        this.model.set("email", $("input", this.el).val());
     }
 
 });
