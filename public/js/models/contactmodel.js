@@ -12,8 +12,7 @@ window.Contact = Backbone.Model.extend({
         state: "",
         country: "",
         tags: "",
-        notes: "",
-        emails: []
+        notes: ""
     },
 
     fullName: function () {
@@ -61,7 +60,7 @@ window.ContactCollection = Backbone.Collection.extend({
 window.ContactEmail = Backbone.Model.extend({
 
     defaults: {
-        contact_id: "",
+        contact_id: 0,
         email: "",
     },
 

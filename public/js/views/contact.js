@@ -153,6 +153,10 @@ window.ContactFormEmailListView = Backbone.View.extend({
 
 window.ContactFormEmailItemView = Backbone.View.extend({
 
+    events: {
+        "click [data-delete]": "delete"
+    },
+
     className: "form-group",
 
     initialize:function () {
@@ -163,6 +167,11 @@ window.ContactFormEmailItemView = Backbone.View.extend({
         $(this.el).html(this.template(this.model.toJSON()));
         return this;
     },
+
+    delete: function() {
+        this.model.destroy();
+        this.remove();
+    }
 
 });
 
