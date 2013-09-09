@@ -30,6 +30,12 @@
         print('<a href="mailto:'+em+'">'+em+'</a><br>');
     }); %>
   </dd>
+  <dt>Tel/mob:</dt>
+  <dd>
+   <% _.each(phones, function(phone){
+        print(_.escape(phone.phone)+'<br>');
+    }); %>
+  </dd>
 </dl>
 <dl class="dl-horizontal">
   <dt>Tags:</dt>
