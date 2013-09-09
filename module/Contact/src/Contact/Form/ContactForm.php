@@ -125,7 +125,7 @@ class ContactForm extends Form
             'type' => 'Collection',
             'options' => array(
                 'label' => 'Emails',
-                'should_create_template' => true,
+                'should_create_template' => false,
                 'allowAdd' => true,
                 'count' => 0,
                 'template_placeholder' => '__placeholder__',
@@ -138,8 +138,8 @@ class ContactForm extends Form
             'name' => 'phones',
             'type' => 'Collection',
             'options' => array(
-                'label' => 'Emails',
-                'should_create_template' => true,
+                'label' => 'Phones',
+                'should_create_template' => false,
                 'allowAdd' => true,
                 'count' => 0,
                 'template_placeholder' => '__placeholder__',

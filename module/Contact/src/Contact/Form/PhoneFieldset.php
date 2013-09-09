@@ -16,7 +16,6 @@ class PhoneFieldset extends Fieldset implements InputFilterProviderInterface
              ->setObject(new Phone());
         $this->add(array(
             'name' => 'phone',
-            'type' => 'Zend\Form\Element\Text',
             'attributes' => array(
                 'type'  => 'text',
             ),
