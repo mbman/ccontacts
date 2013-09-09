@@ -152,8 +152,8 @@ class ContactController extends EntityUsingRestfulController
         $em = $this->getEntityManager();
         $contact->setEntityManager($em);
         $hydrator = $this->getContactHydrator();
-        $hydrator->addStrategy('emails', new CollectionStrategy(
-            new DoctrineHydrator($em,'Contact\Entity\Email')));
+        $hydrator->addStrategy('emails', new CollectionStrategy(new DoctrineHydrator($em,'Contact\Entity\Email')));
+        $hydrator->addStrategy('phones', new CollectionStrategy(new DoctrineHydrator($em,'Contact\Entity\Phone')));
         return new JsonModel($hydrator->extract($contact));
     }
 

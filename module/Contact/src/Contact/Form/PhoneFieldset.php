@@ -1,27 +1,26 @@
 <?php
 namespace Contact\Form;
 
-use Contact\Entity\Email;
+use Contact\Entity\Phone;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
-class EmailFieldset extends Fieldset implements InputFilterProviderInterface
+class PhoneFieldset extends Fieldset implements InputFilterProviderInterface
 {
     public function __construct()
     {
         parent::__construct('contact');
         $this->setHydrator(new ClassMethodsHydrator(false))
-             ->setObject(new Email());
+             ->setObject(new Phone());
         $this->add(array(
-            'name' => 'email',
-            'type' => 'Zend\Form\Element\Email',
+            'name' => 'phone',
             'attributes' => array(
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'E-mail',
+                'label' => 'Phone',
             ),
         ));
     }
@@ -33,7 +32,7 @@ class EmailFieldset extends Fieldset implements InputFilterProviderInterface
     {
         return array(
             array(
-                'name' => 'email',
+                'name' => 'phone',
                 'required' => false,
                 'allow_empty' => true,
                 'filters'  => array(
@@ -42,13 +41,10 @@ class EmailFieldset extends Fieldset implements InputFilterProviderInterface
                 ),
                 'validators' => array(
                     array(
-                        'name' => 'EmailAddress',
+                        'name' => 'StringLength',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'max' => 255,
-                            'messages' => array(
-                                \Zend\Validator\EmailAddress::INVALID_FORMAT => 'Email address format is not valid',
-                            ),
+                            'max' => 20,
                         ),
                     ),
                 ),
