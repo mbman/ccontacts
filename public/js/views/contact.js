@@ -76,17 +76,30 @@ window.ContactEditView = window.ContactNewView.extend();
 
 window.ContactFormView = Backbone.View.extend({
 
+    events: {
+        "submit #contactform": "save",
+        "click .add-email": "addEmail",
+        "click .add-phone": "addPhone"
+    },
+
     initialize:function () {
-        this.model.bind("change", this.render, this);
+        this.model.bind("reset", this.render, this);
+        this.emailListView = new ContactFormEmailListView({model: this.model.get("emails")});
     },
 
     render:function () {
         $(this.el).html(this.template(this.model.toJSON()));
+        $(".contact-emails", this.el).html(this.emailListView.render().el).show();
         return this;
     },
 
-    events: {
-        "submit #contactform": "save"
+    addEmail: function(event){
+        event.preventDefault();
+        this.model.emails().add(new ContactEmail());
+    },
+
+    addPhone: function(event){
+        event.preventDefault();
     },
 
     save: function (event) {
@@ -117,6 +130,50 @@ window.ContactFormView = Backbone.View.extend({
 
 });
 
+
+window.ContactFormEmailListView = Backbone.View.extend({
+
+    initialize:function () {
+        var self = this;
+        this.model.bind("reset", this.render, this);
+        this.model.bind("add", function (email) {
+            $(self.el).append(new ContactFormEmailItemView({model:email}).render().el);
+        });
+    },
+
+    render:function () {
+        $(this.el).empty();
+        _.each(this.model.models, function (email) {
+            $(this.el).append(new ContactFormEmailItemView({model:email}).render().el);
+        }, this);
+        return this;
+    }
+
+});
+
+window.ContactFormEmailItemView = Backbone.View.extend({
+
+    events: {
+        "click [data-delete]": "delete"
+    },
+
+    className: "form-group",
+
+    initialize:function () {
+        this.model.bind("change", this.render, this);
+    },
+
+    render:function () {
+        $(this.el).html(this.template(this.model.toJSON()));
+        return this;
+    },
+
+    delete: function() {
+        this.model.destroy();
+        this.remove();
+    }
+
+});
 
 window.ContactFormHelpView = Backbone.View.extend({
 
