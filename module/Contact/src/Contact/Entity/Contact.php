@@ -130,6 +130,12 @@ class Contact implements InputFilterAwareInterface
     protected $notes;
 
     /**
+     * @ORM\OneToMany(targetEntity="Contact\Entity\Email",mappedBy="contact",cascade={"persist","refresh","remove"})
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * */
+    protected $emails;
+
+    /**
      * @var ContactRepository
      */
     protected $repository;
@@ -147,6 +153,7 @@ class Contact implements InputFilterAwareInterface
 
     public function __construct()
     {
+        $this->emails = new ArrayCollection();
     }
 
     public function setEntityManager(\Doctrine\ORM\EntityManager $entityManager)
@@ -173,7 +180,7 @@ class Contact implements InputFilterAwareInterface
      */
     public function getFullName()
     {
-        return $this->fullName;
+        return $this->getFirstName() + " " + $this->getLastName();
     }
 
     /**
@@ -420,6 +427,38 @@ class Contact implements InputFilterAwareInterface
     public function getEdited()
     {
         return $this->edited;
+    }
+
+    /** @param Email $email */
+    public function addEmail(Email $email) {
+        if (!$email->getEmail()) {
+            return false;
+        }
+        $email->setContact($this);
+        $this->emails->add($email);
+    }
+
+    public function addEmails(Collection $emails)
+    {
+        foreach ($emails as $email) {
+            $this->addEmail($email);
+        }
+    }
+
+    public function removeEmails(Collection $emails)
+    {
+        foreach ($emails as $email) {
+            $email->setContact(null);
+            $this->emails->removeElement($email);
+        }
+    }
+
+    /**
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getEmails()
+    {
+        return $this->emails;
     }
 
     /**
