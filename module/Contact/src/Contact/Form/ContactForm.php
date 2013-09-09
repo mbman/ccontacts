@@ -135,6 +135,20 @@ class ContactForm extends Form
             ),
         ));
         $this->add(array(
+            'name' => 'phones',
+            'type' => 'Collection',
+            'options' => array(
+                'label' => 'Emails',
+                'should_create_template' => true,
+                'allowAdd' => true,
+                'count' => 0,
+                'template_placeholder' => '__placeholder__',
+                'target_element' => array(
+                    'type' => 'Contact\Form\PhoneFieldset',
+                ),
+            ),
+        ));
+        $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
