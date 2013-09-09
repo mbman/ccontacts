@@ -2,6 +2,7 @@
 namespace Contact\Controller;
 
 use Application\Controller\EntityUsingRestfulController;
+use Application\Hydrator\Strategy\CollectionStrategy;
 use Zend\View\Model\JsonModel;
 use Contact\Entity\Contact;
 use Contact\Form\ContactForm;
@@ -44,7 +45,8 @@ class ContactController extends EntityUsingRestfulController
      */
     public function getContactHydrator()
     {
-        return new DoctrineHydrator($this->getEntityManager(),'Contact\Entity\Contact');
+        $hydrator = new DoctrineHydrator($this->getEntityManager(),'Contact\Entity\Contact');
+        return $hydrator;
     }
 
     /**
@@ -147,7 +149,11 @@ class ContactController extends EntityUsingRestfulController
             $this->getResponse()->setStatusCode(404);
             return;
         }
+        $em = $this->getEntityManager();
+        $contact->setEntityManager($em);
         $hydrator = $this->getContactHydrator();
+        $hydrator->addStrategy('emails', new CollectionStrategy(
+            new DoctrineHydrator($em,'Contact\Entity\Email')));
         return new JsonModel($hydrator->extract($contact));
     }
 
