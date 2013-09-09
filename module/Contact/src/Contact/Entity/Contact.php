@@ -160,6 +160,7 @@ class Contact implements InputFilterAwareInterface
     public function __construct()
     {
         $this->emails = new ArrayCollection();
+        $this->phones = new ArrayCollection();
     }
 
     public function setEntityManager(\Doctrine\ORM\EntityManager $entityManager)
