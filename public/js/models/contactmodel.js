@@ -17,6 +17,23 @@ window.Contact = Backbone.Model.extend({
 
     fullName:function () {
         return this.get("firstName")+" "+this.get("lastName");
+    },
+
+    getTags: function() {
+        var tags = [];
+        _.each(this.get("tags").split(","), function(tag){
+          tag = $.trim(tag);
+          tags.push(tag);
+        });
+        return tags;
+    },
+
+    getTagsLinks: function() {
+        var tags = [];
+        _.each(this.getTags(), function(tag){
+          tags.push('<a href="#search/'+escape(tag)+'">'+_.escape(tag)+'</a>');
+        });
+        return tags;
     }
 
 });
