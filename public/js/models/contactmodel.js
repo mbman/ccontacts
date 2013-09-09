@@ -13,9 +13,10 @@ window.Contact = Backbone.Model.extend({
         country: "",
         tags: "",
         notes: "",
+        emails: []
     },
 
-    fullName:function () {
+    fullName: function () {
         return this.get("firstName")+" "+this.get("lastName");
     },
 
@@ -55,4 +56,23 @@ window.ContactCollection = Backbone.Collection.extend({
         });
     }
 
+});
+
+window.ContactEmail = Backbone.Model.extend({
+
+    defaults: {
+        contact_id: "",
+        email: "",
+    },
+
+});
+
+window.ContactEmailCollection = Backbone.Collection.extend({
+
+    model: ContactEmail,
+
+});
+
+Backbone.associate(Contact, {
+  emails: { type: ContactEmailCollection, url: '/emails' }
 });

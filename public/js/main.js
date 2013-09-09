@@ -75,7 +75,8 @@ templateLoader.load([
     "ContactListItemView",
     "ContactNewView",
     "ContactEditView",
-    "ContactFormView"
+    "ContactFormView",
+    "ContactFormEmailItemView"
     ],
     function () {
         app = new Router();
