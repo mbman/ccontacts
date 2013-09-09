@@ -127,7 +127,7 @@ class ContactForm extends Form
                 'label' => 'Emails',
                 'should_create_template' => true,
                 'allowAdd' => true,
-                'count' => 1,
+                'count' => 0,
                 'template_placeholder' => '__placeholder__',
                 'target_element' => array(
                     'type' => 'Contact\Form\EmailFieldset',

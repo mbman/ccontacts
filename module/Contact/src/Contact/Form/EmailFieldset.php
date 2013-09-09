@@ -34,8 +34,8 @@ class EmailFieldset extends Fieldset implements InputFilterProviderInterface
         return array(
             array(
                 'name' => 'email',
-                'required' => true,
-                'allow_empty' => false,
+                'required' => false,
+                'allow_empty' => true,
                 'filters'  => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
@@ -45,7 +45,6 @@ class EmailFieldset extends Fieldset implements InputFilterProviderInterface
                         'name' => 'EmailAddress',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'min' => 1,
                             'max' => 255,
                             'messages' => array(
                                 \Zend\Validator\EmailAddress::INVALID_FORMAT => 'Email address format is not valid',
