@@ -11,6 +11,8 @@ class ContactRepository extends EntityRepository
         'c.city',
         'c.job',
         'c.tags',
+        'p.phone',
+        'e.email',
         );
     /**
      * Returns all contacts who match $searchTerm in their name, company, tag,
@@ -21,7 +23,7 @@ class ContactRepository extends EntityRepository
      */
     public function search($searchTerm = '')
     {
-        $dql = "select c from Contact\Entity\Contact c ";
+        $dql = "select c from Contact\Entity\Contact c JOIN c.emails e JOIN c.phones p ";
         if (!empty($searchTerm)) {
             $dql .= "where ".implode(" like ?1 or ", self::$searchFields).' like ?1 ';
         }
