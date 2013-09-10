@@ -11,6 +11,8 @@ use Zend\InputFilter\InputFilterInterface;
 /**
 * @ORM\Entity
 * @ORM\HasLifecycleCallbacks
+* @ORM\Table(indexes={
+*     @ORM\Index(name="phone", columns={"phone"})})
 */
 class Phone
 {
