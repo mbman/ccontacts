@@ -23,7 +23,8 @@ class ContactRepository extends EntityRepository
      */
     public function search($searchTerm = '')
     {
-        $dql = "select c from Contact\Entity\Contact c JOIN c.emails e JOIN c.phones p ";
+        $dql = "select c from Contact\Entity\Contact c ".
++               "left join c.emails e left join c.phones p ";
         if (!empty($searchTerm)) {
             $dql .= "where ".implode(" like ?1 or ", self::$searchFields).' like ?1 ';
         }
